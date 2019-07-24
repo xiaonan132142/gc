@@ -1,0 +1,76 @@
+$cRed:#FF5E4D;
+$cGreen:#43A345;
+$cWhite:#fff;
+$cBlue:#0072FF;
+$cGray:#aaa;
+$cYellow:#FFD600;
+$cBg: #001436;
+@mixin flex-row($direction:row,$value:center){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $value;
+}
+@mixin setBtn($width,$height,$bgColor,$radius,$color,$font) {
+  width:$width;
+  height:$height;
+  border-radius: $radius;
+  background-color: $bgColor;
+  font-size: $font;
+  color:$color;
+}
+.header-router{
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  text-align: center;
+  .icon{
+    fill: $cWhite;
+    position: absolute;
+    top:8px;
+    left:12px;
+  }
+  .title{
+    font-size: 17px;
+    color: $cWhite;
+  }
+}
+.background-img{
+  background-size: 100%;
+  background-repeat:no-repeat;
+}
+.btn{
+  background:none;
+  border:0;
+  margin:0;
+  padding:0;
+  font-size:12px;
+}
+.goback{
+  height: 48px;
+  position: absolute;
+  left: 10px;
+  color:#fff;
+}
+.goback-btn{
+  height: 40px;
+  margin-left: 10px;
+  color:$cWhite;
+}
+.block{
+  border-radius: 13px;
+  background-color:$cWhite;
+  padding:10px 23px;
+  box-sizing: border-box;
+  .item{
+    @include flex-row(row,space-between);
+    height: 40px;
+    line-height: 40px;
+    font-size:12px;
+    color:#6A6A6A;
+  }
+}
+.resetScrollBar{
+  &::-webkit-scrollbar { width: 0 !important }
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
