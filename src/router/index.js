@@ -3,11 +3,7 @@ import Router from 'vue-router'
 import store from '@/store'
 import Index from '@/views/index'
 import Mine from '@/views/mine'
-import More from '@/views/more'
-import MineDetails from '@/views/mineDetails'
-import MessageBoard from '@/views/messageBoard'
-import ActiveRule from '@/views/activeRule'
-
+import Add from '@/views/add'
 Vue.use(Router)
 
 Router.prototype.goBack = function (val) {
@@ -34,25 +30,10 @@ const router =  new Router({
       component: Mine,
     },
     {
-      path: '/more',
-      name: 'More',
-      component: More,
+      path: '/add',
+      name: 'Add',
+      component: Add,
     },
-    {
-      path: '/mineDetails',
-      name: 'MineDetails',
-      component: MineDetails,
-    },
-    {
-      path: '/activeRule',
-      name: 'ActiveRule',
-      component: ActiveRule,
-    },
-    {
-      path: '/messageBoard',
-      name: 'MessageBoard',
-      component: MessageBoard,
-    }
   ]
 })
 
@@ -60,5 +41,4 @@ router.afterEach((to, from) => {
   if(store.state.direction !== 'tip')
     store.commit('SET_DIRECTION', 'tip');
 })
-
 export default router;

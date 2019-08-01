@@ -17,7 +17,6 @@
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-scroller": "^2.2.4",
-    "vue-seamless-scroll": "^1.1.16",
     "vuex": "^3.1.1",
     "vux": "^2.9.4"
   },
@@ -60,6 +59,7 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "vux-loader": "^1.2.9",
+    "vux-uploader": "^0.1.9",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",

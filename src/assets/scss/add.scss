@@ -1,0 +1,44 @@
+@import "./theme";
+.gc-add{
+  &.container-view{
+    background-color: $cBg;
+    .edit-block{
+      padding:10px 20px;
+      position: absolute;
+      top:40px;
+      left: 0;
+      right:0;
+      bottom:0;
+      background-color: $cWhite;
+      @include borderRadius(28px,28px,0,0);
+      overflow-y: auto;
+      .single-block{
+        width: 100%;
+        height:300px;
+        border:1px solid #ccc;
+        padding:10px;
+        margin-bottom: 10px;
+        .operation{
+          width: 100%;
+          height:50px;
+          @include flex-row(row,flex-start);
+          .ope-btn{
+            width:50px;
+            height:30px;
+            border:1px solid #ccc;
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin:0 10px;
+          }
+          .area{
+            padding:0;
+            width:100%;
+            height:50px;
+            border:1px solid #ccc;
+          }
+        }
+      }
+    }
+  }
+}

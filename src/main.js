@@ -11,8 +11,7 @@ import global from './global'
 import FastClick from 'fastclick'
 FastClick.attach(document.body)
 
-import VueScroller from 'vue-scroller'
-Vue.use(VueScroller)
+
 Vue.prototype.axios = axios
 Vue.prototype.GLOBAL = global
 import transition from '@/components/layout/transition';

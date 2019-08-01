@@ -5,10 +5,16 @@ $cBlue:#0072FF;
 $cGray:#aaa;
 $cYellow:#FFD600;
 $cBg: #001436;
-@mixin flex-row($direction:row,$value:center){
+@mixin flex-row($direction:row,$value:center,$valueT:center){
   display: flex;
   flex-direction: $direction;
   justify-content: $value;
+  align-items: $valueT;
+}
+@mixin block($w,$h,$b){
+  width: $w;
+  height: $h;
+  border-radius: $b;
 }
 @mixin setBtn($width,$height,$bgColor,$radius,$color,$font) {
   width:$width;
@@ -18,25 +24,11 @@ $cBg: #001436;
   font-size: $font;
   color:$color;
 }
-.header-router{
-  height: 50px;
-  line-height: 50px;
-  position: relative;
-  text-align: center;
-  .icon{
-    fill: $cWhite;
-    position: absolute;
-    top:8px;
-    left:12px;
-  }
-  .title{
-    font-size: 17px;
-    color: $cWhite;
-  }
-}
-.background-img{
-  background-size: 100%;
-  background-repeat:no-repeat;
+@mixin borderRadius($tl,$tr,$bl,$br){
+  border-top-left-radius:$tl ;
+  border-top-right-radius: $tr;
+  border-bottom-left-radius: $bl;
+  border-bottom-right-radius: $br;
 }
 .btn{
   background:none;
@@ -55,19 +47,6 @@ $cBg: #001436;
   height: 40px;
   margin-left: 10px;
   color:$cWhite;
-}
-.block{
-  border-radius: 13px;
-  background-color:$cWhite;
-  padding:10px 23px;
-  box-sizing: border-box;
-  .item{
-    @include flex-row(row,space-between);
-    height: 40px;
-    line-height: 40px;
-    font-size:12px;
-    color:#6A6A6A;
-  }
 }
 .resetScrollBar{
   &::-webkit-scrollbar { width: 0 !important }

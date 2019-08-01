@@ -36,7 +36,6 @@ export default instance;
  * @param headers
  * @returns {Promise}
  */
-/*
 export function request(methed,url, data = {},headers) {
     return new Promise((resolve, reject) => {
         instance({
@@ -54,4 +53,3 @@ export function request(methed,url, data = {},headers) {
         })
     })
 }
-*/
