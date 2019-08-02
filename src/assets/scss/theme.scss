@@ -30,6 +30,15 @@ $cBg: #001436;
   border-bottom-left-radius: $bl;
   border-bottom-right-radius: $br;
 }
+.block{
+  padding:10px 20px;
+  position: absolute;
+  top:40px;
+  left: 0;
+  right:0;
+  bottom:0;
+  overflow-y: auto;
+}
 .btn{
   background:none;
   border:0;
@@ -52,4 +61,7 @@ $cBg: #001436;
   &::-webkit-scrollbar { width: 0 !important }
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
+}
+.weui-cell:before{
+  border-top:0 !important;
 }

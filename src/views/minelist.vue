@@ -3,12 +3,13 @@
         <li
             v-for="(item,index) in list"
             :key="index"
+            @click="checkDesc(item)"
             :class="{move:candelete.id==item.id}"
             @touchstart="touchStart(item)"
             @touchend="touchEnd(item)">
-            {{item.text}}{{item.id}}
-            <div class="del edit" @click="editItem(item)">修改</div>
-            <div class="del" @click="deleteItem(item)">删除</div>
+            {{item.title}}{{item.id}}
+            <div class="del edit" @click.stop="editItem(item)">修改</div>
+            <div class="del" @click.stop="deleteItem(item)">删除</div>
         </li>
     </ul>
 </template>
@@ -19,28 +20,94 @@
             return {
                 list: [{
                     id: 1,
-                    text: '请左滑动删除我吧'
+                    title: '请左滑动删除我吧',
+                    contents:[
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'1发开始的减肥开始疯狂上岛咖啡开始的房间看了世界仿佛都是开发建设的咖啡开始',
+                                imgdata:'',
+                            },
+                        },
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'1发开始的减肥开始疯狂上岛咖啡开始的房',
+                                imgdata:'',
+                            },
+                        },
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'1发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房',
+                                imgdata:'',
+                            },
+                        }
+                    ],
                 }, {
                     id: 2,
-                    text: '请左滑动删除我吧'
+                    title: '请左滑动删除我吧',
+                    contents:[
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'2发开始的减肥开始疯狂上岛咖啡开始的房间看了世界仿佛都是开发建设的咖啡开始',
+                                imgdata:'',
+                            },
+                        },
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'2发开始的减肥开始疯狂上岛咖啡开始的房',
+                                imgdata:'',
+                            },
+                        },
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'2发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房',
+                                imgdata:'',
+                            },
+                        }
+                    ],
                 }, {
                     id: 3,
-                    text: '请左滑动删除我吧'
-                }, {
-                    id: 4,
-                    text: '请左滑动删除我吧'
-                }, {
-                    id: 5,
-                    text: '请左滑动删除我吧'
-                }, {
-                    id: 6,
-                    text: '请左滑动删除我吧'
+                    title: '请左滑动删除我吧',
+                    contents:[
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'3发开始的减肥开始疯狂上岛咖啡开始的房间看了世界仿佛都是开发建设的咖啡开始',
+                                imgdata:'',
+                            },
+                        },
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'3发开始的减肥开始疯狂上岛咖啡开始的房',
+                                imgdata:'',
+                            },
+                        },
+                        {
+                            id: Date.now(),
+                            editModel:{
+                                decs:'3发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房',
+                                imgdata:'',
+                            },
+                        }
+                    ],
                 }],
                 clientNum: {}, // 记录开始滑动（x1）,结束滑动（x2）的鼠标指针的位置
                 candelete: {}, // 滑动的item
             }
         },
         methods: {
+            checkDesc(item){
+                this.$router.push({
+                    name:'Check',
+                    params:item
+                })
+            },
             deleteItem(item) {
                 console.log(item)
             },

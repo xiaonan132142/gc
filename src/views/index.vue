@@ -4,7 +4,7 @@
             <img src="../assets/img/user.jpg" class="avatar-s" alt="avator">
         </button>
         <x-input title="搜索" class="weui-vcode">
-            <x-button slot="right" type="primary" mini>搜索一下</x-button>
+            <x-button @click.native="handleRouter('Search')" slot="right" type="primary" mini>搜索一下</x-button>
         </x-input>
     </div>
 </template>

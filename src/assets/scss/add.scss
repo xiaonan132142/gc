@@ -3,12 +3,7 @@
   &.container-view{
     background-color: $cBg;
     .edit-block{
-      padding:10px 20px;
-      position: absolute;
-      top:40px;
-      left: 0;
-      right:0;
-      bottom:0;
+      @extend .block;
       background-color: $cWhite;
       @include borderRadius(28px,28px,0,0);
       overflow-y: auto;

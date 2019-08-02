@@ -1,0 +1,28 @@
+@import "./theme";
+.gc-comments{
+  &.container-view{
+    background-color: $cBg;
+    .comments-w{
+      @extend .block;
+      top:75px;
+      background-color: #e8e8e8;
+      .comments-block{
+        height: 120px;
+        background-color: $cWhite;
+        margin:10px;
+        border-radius: 5px;
+        padding:10px;
+        .item-block{
+          @include flex-row(row,flex-start);
+          line-height: 20px;
+          .sp{
+            flex:1;
+            height:30px;
+            line-height: 30px;
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+@import "./theme";
+.gc-check{
+  &.container-view {
+    background-color: $cBg;
+    .content-wrap{
+      @extend .block;
+      .title{
+        color:#fff;
+        width: 100%;
+        font-size: 20px;
+        text-align: left;
+        line-height: 25px;
+      }
+      .single-block{
+        color:#fff;
+        .step{
+          font-size: 16px;
+          margin:10px 0;
+        }
+        .desc{
+          font-size: 14px;
+          line-height: 17px;
+          margin-bottom: 10px;
+        }
+      }
+      .comment{
+        width: 100%;
+        height:300px;
+        background-color: $cWhite;
+        border-radius: 18px;
+        margin:10px 0;
+        padding:10px;
+        position: relative;
+        .title{
+          color:$cBg;
+          font-size: 14px;
+          margin:5px 0 10px;
+        }
+        .weui-cells_checkbox{
+          @include flex-row();
+        }
+        .areablock{
+          height:80px;
+          line-height: 16px;
+          font-size:14px;
+        }
+        .submit-btn{
+          position: absolute;
+          bottom: 10px;
+          left: 10%;
+          width: 81%;
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,9 @@ import store from '@/store'
 import Index from '@/views/index'
 import Mine from '@/views/mine'
 import Add from '@/views/add'
+import Check from '@/views/check'
+import Search from '@/views/search'
+import Comments from '@/views/comments'
 Vue.use(Router)
 
 Router.prototype.goBack = function (val) {
@@ -33,6 +36,21 @@ const router =  new Router({
       path: '/add',
       name: 'Add',
       component: Add,
+    },
+    {
+      path:'/check',
+      name:'Check',
+      component: Check,
+    },
+    {
+      path:'/search',
+      name:'Search',
+      component: Search,
+    },
+    {
+      path:'/comments',
+      name:'Comments',
+      component: Comments,
     },
   ]
 })
