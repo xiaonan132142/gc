@@ -1,41 +1,61 @@
 <template>
-    <div class="gc-search">
-        <button @click="goback" class="btn goback-btn">返回上一层</button>
-        <div class="search-wrap">
-            <x-input v-model="keyword" @on-blur="search" class="weui-vcode" placeholder="请输入查询垃圾">
-                <img style="margin-right: 10px" slot="label" src="../assets/img/search.png" width="16" height="15">
-            </x-input>
-        </div>
-        <div class="search-list">
-            <componentView></componentView>
+    <div>
+        <div class="item-block" v-for="(item,index) in list" @click="handleRouter(item)">
+            <div class="title">
+                <span>{{item.title}}</span>
+            </div>
+            <div v-if="item.isimg" class="dec-block-img">
+                <div class="left">
+                    <div class="userinfo">
+                        <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
+                        <span>{{item.accountname}}</span>
+                    </div>
+                    <div class="content">附近的开发接口就分开两地分居的手机发地方</div>
+                </div>
+                <img src="../assets/img/eg.png" width="104px" height="77px" alt="">
+            </div>
+            <div v-else class="dec-block">
+                <div class="userinfo">
+                    <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
+                    <span>{{item.accountname}}</span>
+                </div>
+                <div class="content">附近的开发接口就分开两地分居的手机发地方</div>
+            </div>
+            <div class="article-info">
+                <div class="info">
+                    <span class="price" v-if="!item.free">{{item.price}} 垃圾币</span>
+                    <span class="comment">1条评论</span>
+                    <span>{{item.date}}</span>
+                </div>
+                <button class="btn check-btn" @click.stop="checkComment(item.id)">查看评论</button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {XButton, Toast,XInput} from 'vux'
-    import '../assets/scss/search.scss'
-    import componentView from './componentView'
+    import {XButton} from 'vux'
+    import '../assets/scss/componentView.scss'
 
     export default {
-        name: "search",
+        name: "componentView",
         components: {
-            XInput,XButton, Toast,componentView
+            XButton
         },
         data() {
             return {
-                keyword:'',
                 list: [
                     {
                         id: '1',
                         avatar: '',
                         accountname: 'username',
-                        date: '2019.08.16',
+                        date: '2019/08/16',
                         title: '啦啦啊啊了不错哦',
                         score: 98,
                         isfree: false,
                         isbuy: false,
-                        tokens: 2,
+                        price: 2,
+                        isimg:true,
                         contents: [
                             {
                                 id: Date.now(),
@@ -69,7 +89,8 @@
                         score: 98,
                         isfree: true,
                         isbuy: false,
-                        tokens: 4,
+                        price: 4,
+                        isimg:false,
                         contents: [
                             {
                                 id: Date.now(),
@@ -102,7 +123,8 @@
                         score: 98,
                         isfree: false,
                         isbuy: true,
-                        tokens: 4
+                        price: 4,
+                        isimg:false,
                     },
                     {
                         id: '4',
@@ -113,7 +135,8 @@
                         score: 98,
                         isfree: false,
                         isbuy: false,
-                        tokens: 2
+                        price: 2,
+                        isimg:false,
                     },
                     {
                         id: '5',
@@ -124,7 +147,8 @@
                         score: 98,
                         isfree: false,
                         isbuy: false,
-                        tokens: 2
+                        price: 2,
+                        isimg:false,
                     },
                     {
                         id: '6',
@@ -135,22 +159,34 @@
                         score: 98,
                         isfree: false,
                         isbuy: false,
-                        tokens: 2
+                        price: 2,
+                        isimg:false,
                     },
                 ],
             }
-        },
-        created(){
-           //this.list = this.$router.currentRoute.params.data
-        },
-        mounted(){
-
         },
         methods: {
             goback() {
                 this.$router.go(-1)
             },
-            search(){},
+            checkComment(val) {
+                console.log(val)
+                this.$router.push({
+                    name:'Comments',
+                    params:{id:val}
+                })
+            },
+            handleRouter(item) {
+                if (!item.isfree && !item.isbuy) {
+                    this.showToast = true
+                    this.errorMsg = '请先解锁'
+                    return
+                }
+                this.$router.push({
+                    name: 'Check',
+                    params: item,
+                })
+            },
         },
     }
 </script>

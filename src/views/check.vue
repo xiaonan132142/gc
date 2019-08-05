@@ -3,16 +3,56 @@
         <button @click="goback" class="btn goback-btn">返回上一层</button>
         <div class="content-wrap">
             <div class="title">{{parentData.title}}</div>
+            <div class="article-info">
+                <div class="author">
+                    <img src="../assets/img/user.jpg" width="25px" height="25px" alt="">
+                    <span class="name">accountname</span>
+                </div>
+                <span class="date">2019/07/19</span>
+            </div>
             <div class="single-block" v-for="(item,index) in parentData.contents">
                 <div class="step">第{{index+1}}步</div>
                 <div class="desc">{{item.editModel.decs}}</div>
-                <img src="../assets/img/eg.png" width="100%" height="200px" alt="">
+                <img src="../assets/img/eg.png" width="100%" height="181px" alt="">
+            </div>
+            <div class="comment-list">
+                <div class="title">评价</div>
+                <div class="comment-item" v-for="(item,index) in commentList">
+                    <img class="avatar" src="../assets/img/user.jpg" alt="">
+                    <div class="comment-info">
+                        <span class="accountname">{{item.accountname}}</span>
+                        <span class="content">{{item.content}}</span>
+                        <span class="date">{{item.date}}</span>
+                    </div>
+                </div>
             </div>
             <div class="comment">
-                <div class="title">评价</div>
-                <checklist :options="commonList" v-model="radioValue" :max="1" @on-change="change"></checklist>
-                <x-textarea class="areablock" :max="50" placeholder="请输入评价" required v-model="comment"></x-textarea>
-                <x-button class="submit-btn" @click.native="submit" type="primary">提交</x-button>
+                <checker
+                        @on-change="changeCheck"
+                        v-model="radioValue"
+                        default-item-class="defalut-class"
+                        selected-item-class="selected-class"
+                >
+                    <checker-item key="good" value="good">
+                        <template>
+                            <div class="item-wrap">
+                                <img v-if="radioValue!='good'" src="../assets/img/good.png" width="24px" height="22px" alt="">
+                                <img v-else src="../assets/img/goodSelect.png" width="24px" height="22px" alt="">
+                                <span class="num">2</span>
+                            </div>
+                        </template>
+                    </checker-item>
+                    <checker-item key="sad" value="sad">
+                        <template>
+                            <div class="item-wrap">
+                                <img v-if="radioValue!='sad'" src="../assets/img/sad.png" width="24px" height="22px" alt="">
+                                <img v-else src="../assets/img/sadSelect.png" width="24px" height="22px" alt="">
+                                <span class="num">2</span>
+                            </div>
+                        </template>
+                    </checker-item>
+                </checker>
+                <x-input @on-blur="submit" class="areablock" :max="50" placeholder="发表你的观点吧" v-model="comment"></x-input>
             </div>
         </div>
     </div>
@@ -20,21 +60,22 @@
 
 <script>
     import '../assets/scss/check.scss'
-    import {Checklist,XTextarea,XButton} from 'vux'
+    import {Checklist,XInput,XButton,Checker, CheckerItem} from 'vux'
     export default {
         name: "check",
         components:{
-            Checklist,XTextarea,XButton
+            Checklist,XInput,XButton,Checker, CheckerItem
         },
         data() {
             return {
+                isComment:true,
                 parentData:{},
-                commonList:[
-                    {key:1,value:'好评'},
-                    {key:2,value:'中评'},
-                    {key:3,value:'差评'},
+                commentList:[
+                    {avatar:'',accountname:'11111',content:'收到回复速度较快放寒假看对方收到回复速度较快放寒假看对方收到回复速度较快放寒假看对方',date:'2019/07.19'},
+                    {avatar:'',accountname:'11111',content:'收到回复速度较快放寒假看对方',date:'2019/07.19'},
+                    {avatar:'',accountname:'11111',content:'收到回复速度较快放寒假看对方',date:'2019/07.19'},
                 ],
-                radioValue:[1],
+                radioValue:'good',
                 comment:'',
             }
         },
@@ -45,8 +86,9 @@
             goback() {
                 this.$router.go(-1)
             },
-            change(val){
+            changeCheck(val){
                 this.radioValue=val
+                this.submit()
             },
             submit(){
                 let params={
@@ -60,6 +102,6 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

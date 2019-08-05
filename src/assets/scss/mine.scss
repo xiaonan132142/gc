@@ -1,18 +1,20 @@
 @import "./theme";
 .mine-wraper{
   &.container-view{
-    background-color: $cBg;
+    background-color: #F5F5F5;
+    position: relative;
     .mine-header{
+      padding:0 20px;
       margin-top: -14px;
       height: 171px;
-      @include flex-row(column,flex-start);
-      align-items: center;
+      @include flex-row(row,space-between);
       .avatar-b{
-        @include block(69px,69px,69px);
+        @include block(83px);
       }
       .name{
-        color: $cWhite;
-        margin-top: 13px;
+        color: #000;
+        font-size: 30px;
+        font-weight: 700;
       }
       .price{
         margin-top: 21px;
@@ -31,20 +33,42 @@
       }
     }
     .mine-opration{
-      position: absolute;
-      top:200px;
-      left:0;
-      right:0;
-      bottom:0;
-      @include borderRadius(28px,28px,0,0);
       padding:0 20px;
+      @extend .block;
+      top:200px;
       background-color: $cWhite;
-      .btn-wrap{
-        @include flex-row();
+      .opration-item{
         width: 100%;
-        height:60px;
-        padding:0 50px;
+        height: 70px;
+        @include flex-row(row,space-between);
+        border-bottom: 1px solid #F5F5F5;
+        .key{
+          font-size: 18px;
+          color:#000;
+        }
+        .item{
+          flex:1;
+          text-align: right;
+          .keyvalue{
+            font-size: 16px;
+            color:rgba(0,0,0,.4);
+            margin-right: 9px;
+          }
+        }
       }
+    }
+    .public-btn{
+      position: absolute;
+      bottom:63px;
+      left:50%;
+      margin-left: -79px;
+      width: 158px;
+      height:60px;
+      background-color: #00C691;
+      border-radius: 30px;
+      color:#fff;
+      font-size: 18px;
+      box-shadow: 0 4px 16px 0 rgba(0,198,145,.38);
     }
   }
 }

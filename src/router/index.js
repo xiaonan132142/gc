@@ -6,7 +6,9 @@ import Mine from '@/views/mine'
 import Add from '@/views/add'
 import Check from '@/views/check'
 import Search from '@/views/search'
-import Comments from '@/views/comments'
+import Article from '@/views/article'
+import Public from '@/views/public'
+import SuccessModel from '@/views/successModel'
 Vue.use(Router)
 
 Router.prototype.goBack = function (val) {
@@ -48,9 +50,19 @@ const router =  new Router({
       component: Search,
     },
     {
-      path:'/comments',
-      name:'Comments',
-      component: Comments,
+      path:'/article',
+      name:'Article',
+      component: Article,
+    },
+    {
+      path:'/public',
+      name:'Public',
+      component: Public,
+    },
+    {
+      path:'/successModel',
+      name:'SuccessModel',
+      component: SuccessModel,
     },
   ]
 })

@@ -11,10 +11,10 @@ $cBg: #001436;
   justify-content: $value;
   align-items: $valueT;
 }
-@mixin block($w,$h,$b){
-  width: $w;
-  height: $h;
-  border-radius: $b;
+@mixin block($val){
+  width: $val;
+  height: $val;
+  border-radius: $val;
 }
 @mixin setBtn($width,$height,$bgColor,$radius,$color,$font) {
   width:$width;
@@ -30,15 +30,6 @@ $cBg: #001436;
   border-bottom-left-radius: $bl;
   border-bottom-right-radius: $br;
 }
-.block{
-  padding:10px 20px;
-  position: absolute;
-  top:40px;
-  left: 0;
-  right:0;
-  bottom:0;
-  overflow-y: auto;
-}
 .btn{
   background:none;
   border:0;
@@ -50,12 +41,12 @@ $cBg: #001436;
   height: 48px;
   position: absolute;
   left: 10px;
-  color:#fff;
+  color:$cBg;
 }
 .goback-btn{
   height: 40px;
+  color:$cBg;
   margin-left: 10px;
-  color:$cWhite;
 }
 .resetScrollBar{
   &::-webkit-scrollbar { width: 0 !important }
@@ -64,4 +55,28 @@ $cBg: #001436;
 }
 .weui-cell:before{
   border-top:0 !important;
+}
+.block{
+  padding:10px 20px;
+  position: absolute;
+  top:40px;
+  left: 0;
+  right:0;
+  bottom:0;
+  overflow-y: auto;
+  @extend .resetScrollBar;
+}
+.public-header{
+  padding:0 10px;
+  height: 56px;
+  @include flex-row(row,space-between);
+  .public-btn{
+    width: 110px;
+    height:38px;
+    background-color: #00C691;
+    border-radius: 30px;
+    color:#fff;
+    font-size: 18px;
+    box-shadow: 0 4px 16px 0 rgba(0,198,145,.38);
+  }
 }

@@ -1,0 +1,13 @@
+@import "./theme";
+.gc-article {
+  &.container-view {
+    background-color: #f5f5f5;
+    .article-list{
+      padding:0 20px;
+      background-color: $cWhite;
+      @extend .block;
+      @include borderRadius(28px,28px,0,0);
+      top:40px;
+    }
+  }
+}

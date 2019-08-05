@@ -1,0 +1,112 @@
+<template>
+    <div class="gc-public">
+        <div class="public-header">
+            <button @click="goback" class="btn goback-btn">返回上一层</button>
+            <button @click="toPublc" class="public-btn">发布</button>
+        </div>
+        <div class="public-content">
+            <x-input :max="30" placeholder="请输入标题" required class="title" v-model="titleVal"></x-input>
+            <div class="main-content" v-for="(item,index) in contentlist">
+                <div class="header">
+                    <span>第{{index+1}}步</span>
+                    <div>
+                        <button @click="handleAdd" v-if="!item.addModel.desc" class="btn addbtn">点击添加内容</button>
+                        <button @click="handleAdd" v-else class="btn addbtn">编辑</button>
+                        <button v-if="index>0" class="btn delbtn" @click="delStep(item)">X</button>
+                    </div>
+                </div>
+                <div v-if="item.addModel.desc" class="content">
+                    <div class="desc">{{item.addModel.desc}}</div>
+                    <img src="../assets/img/eg.png" width="100%" height="181px" alt="img">
+                </div>
+            </div>
+            <button v-if="contentlist.length<4" class="btn step-btn" @click="addStep">+添加步骤</button>
+        </div>
+        <div v-transfer-dom>
+            <x-dialog @on-hide="showDialog=false" v-model="showDialog" hide-on-blur
+                      :dialog-style="{'max-width': '100%',width:'90%', height: '359px','padding':'18px 0 30px', 'background-color': '#fff','border-radius':'20px'}">
+                <div class="dialog-wrap"
+                     style="width: 100%;height: 100%;padding:15px 19px 0 19px;text-align: center;font-size: 12px;">
+                    <span style="font-size: 16px;line-height: 22px">请选择付费设置</span>
+                    <div style="color:#000;font-size:18px;display: flex;justify-content: flex-start">
+                    </div>
+                    <checklist :max="1" style="text-align: left;margin:10px 0;" :options="commonList" v-model="switchVal" @on-change="handleChange"></checklist>
+                    <div style="color:#000;display: flex;margin:10px 0;justify-content: center;margin-bottom: 30px">
+                        <x-input :disabled="switchVal.toString()=='1'" :max="3"
+                                 style="width:170px;height: 44px;background-color:#F1F1F1;border: 1px solid #ccc;color:#000;border-radius: 5px"
+                                 v-model="setNum"></x-input>
+                        <p style="height:30px;line-height: 44px;margin-left: 10px">垃圾币</p>
+                    </div>
+                    <x-button style="width: 100%;height:60px;background-color: #00C691;border-radius: 30px;color:#fff;font-size: 18px;box-shadow: 0 4px 16px 0 rgba(0,198,145,.38);" type="primary" @click.native="submit">确定
+                    </x-button>
+                </div>
+            </x-dialog>
+        </div>
+    </div>
+</template>
+
+<script>
+    import '../assets/scss/public.scss'
+    import {XInput, XButton, XSwitch, XDialog, TransferDomDirective as TransferDom,Checklist} from 'vux'
+
+    export default {
+        name: "public",
+        directives: {
+            TransferDom,
+        },
+        components: {
+            XInput, XButton, XDialog, XSwitch,Checklist
+        },
+        data() {
+            return {
+                titleVal: '',
+
+                commonList: [
+                    {key: '1', value: '免费', inlineDesc: '用户可免费查看'},
+                    {key: '2', value: '付费', inlineDesc: '用户需付费才能查看'},
+                ],
+                contentlist: [
+                    {addModel: {}}
+                ],
+                showDialog: false,
+                switchVal: ['1'],
+                setNum: 0,
+            }
+        },
+        methods: {
+            goback() {
+                this.$router.go(-1)
+            },
+            toPublc() {
+                this.showDialog = true
+            },
+            addStep() {
+                this.contentlist.push({
+                    addModel: {desc: '', imgurl: ''}
+                })
+            },
+            delStep(item) {
+                let index = this.contentlist.indexOf(item)
+                if (index !== -1) {
+                    this.contentlist.splice(index, 1)
+                }
+            },
+            handleAdd() {
+                this.$router.push('Add')
+            },
+            handleChange(val) {
+                this.switchVal = val
+                val==='1'?this.setNum=0:this.setNum=this.setNum
+            },
+            submit() {
+                let params = {
+                    state: this.switchVal,
+                    count: this.setNum,
+                }
+                console.log(params)
+                this.showDialog = false
+                this.$router.push('SuccessModel')
+            },
+        },
+    }
+</script>
