@@ -6,7 +6,7 @@
         </div>
         <div class="single-block">
             <div class="step">
-                第1步
+                第{{step}}步
             </div>
             <x-textarea class="area" :max="50" placeholder="请输入内容" v-model="desc"></x-textarea>
             <!-- <uploader
@@ -37,13 +37,26 @@
         components:{
             XTextarea
         },
+        created(){
+            let {data,name} = this.$router.currentRoute.params
+            if(name==='add'){
+                this.step=data+1
+            }else{
+                this.modelData = data
+            }
+        },
         data(){
             return{
                 titleVal:'',
                 imagesUrl:[],
                 uploadUrl:'',
                 params:{},
-                desc:'',
+                step:'',
+                modelData:{
+                    id:'',
+                    desc:'',
+                    imgurl:'',
+                },
             }
         },
         methods:{

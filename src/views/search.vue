@@ -7,7 +7,7 @@
             </x-input>
         </div>
         <div class="search-list">
-            <componentView></componentView>
+            <componentView :parentData="keyword" ref="resultlist"></componentView>
         </div>
     </div>
 </template>
@@ -25,132 +25,19 @@
         data() {
             return {
                 keyword:'',
-                list: [
-                    {
-                        id: '1',
-                        avatar: '',
-                        accountname: 'username',
-                        date: '2019.08.16',
-                        title: '啦啦啊啊了不错哦',
-                        score: 98,
-                        isfree: false,
-                        isbuy: false,
-                        tokens: 2,
-                        contents: [
-                            {
-                                id: Date.now(),
-                                editModel: {
-                                    decs: '1发开始的减肥开始疯狂上岛咖啡开始的房间看了世界仿佛都是开发建设的咖啡开始',
-                                    imgdata: '',
-                                },
-                            },
-                            {
-                                id: Date.now(),
-                                editModel: {
-                                    decs: '1发开始的减肥开始疯狂上岛咖啡开始的房',
-                                    imgdata: '',
-                                },
-                            },
-                            {
-                                id: Date.now(),
-                                editModel: {
-                                    decs: '1发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房',
-                                    imgdata: '',
-                                },
-                            }
-                        ],
-                    },
-                    {
-                        id: '2',
-                        avatar: '',
-                        accountname: 'username',
-                        date: '2019.08.16',
-                        title: '啦啦啊啊',
-                        score: 98,
-                        isfree: true,
-                        isbuy: false,
-                        tokens: 4,
-                        contents: [
-                            {
-                                id: Date.now(),
-                                editModel: {
-                                    decs: '1发开始的减肥开始疯狂上岛咖啡开始的房间看了世界仿佛都是开发建设的咖啡开始',
-                                    imgdata: '',
-                                },
-                            },
-                            {
-                                id: Date.now(),
-                                editModel: {
-                                    decs: '1发开始的减肥开始疯狂上岛咖啡开始的房',
-                                    imgdata: '',
-                                },
-                            },
-                            {
-                                id: Date.now(),
-                                editModel: {
-                                    decs: '1发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房',
-                                    imgdata: '',
-                                },
-                            }]
-                    },
-                    {
-                        id: '3',
-                        avatar: '',
-                        accountname: 'username',
-                        date: '2019.08.16',
-                        title: '啦啦啊啊是否觉得是开发商分慧生对冯绍峰',
-                        score: 98,
-                        isfree: false,
-                        isbuy: true,
-                        tokens: 4
-                    },
-                    {
-                        id: '4',
-                        avatar: '',
-                        accountname: 'username',
-                        date: '2019.08.16',
-                        title: '啦啦啊啊了不错哦',
-                        score: 98,
-                        isfree: false,
-                        isbuy: false,
-                        tokens: 2
-                    },
-                    {
-                        id: '5',
-                        avatar: '',
-                        accountname: 'username',
-                        date: '2019.08.16',
-                        title: '啦啦啊啊了不错哦',
-                        score: 98,
-                        isfree: false,
-                        isbuy: false,
-                        tokens: 2
-                    },
-                    {
-                        id: '6',
-                        avatar: '',
-                        accountname: 'username',
-                        date: '2019.08.16',
-                        title: '啦啦啊啊了不错哦',
-                        score: 98,
-                        isfree: false,
-                        isbuy: false,
-                        tokens: 2
-                    },
-                ],
             }
         },
         created(){
-           //this.list = this.$router.currentRoute.params.data
-        },
-        mounted(){
-
+            this.keyword = this.$router.currentRoute.params.keyword
+            this.$refs.resultlist.getResultlist()
         },
         methods: {
             goback() {
                 this.$router.go(-1)
             },
-            search(){},
+            search(){
+                this.$refs.resultlist.getResultlist()
+            },
         },
     }
 </script>

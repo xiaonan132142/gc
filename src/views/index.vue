@@ -11,7 +11,7 @@
             <button class="btn personc" @click="handleRouter('Mine')">个人中心</button>
         </div>
         <div class="top-list">
-            <componentView></componentView>
+            <componentView ref="toplist"></componentView>
         </div>
     </div>
 </template>
@@ -29,16 +29,17 @@
     } from 'vux';
     import '../assets/scss/indexStyle.scss';
     import {mapGetters} from 'vuex';
+
     export default {
         directives: {
             TransferDom,
         },
         components: {
-            XInput,Group,XButton,componentView
+            XInput, Group, XButton, componentView
         },
         data() {
             return {
-                keyword:'',
+                keyword: '',
                 toplist: [
                     {
                         id: '1',
@@ -170,26 +171,14 @@
                 });
                 this.userBanlance = userbalance.length ? userbalance[0].split(' ')[0] : 0;
             },
-            handleRouter(name){
+            handleRouter(name) {
                 this.$router.push(name)
             },
-            search(){
+            search() {
                 this.$router.push({
                     name: 'Search',
-                    params: {},
+                    params: {keyword: this.keyword}
                 });
-                this.axios.get(this.GLOBAL.baseUrl + '/classification/getAll',{keyword:this.keyword})
-                    .then((res)=>{
-                        let {state,data} = res.data
-                        if(state === 'success'){
-                            this.$router.push({
-                                name: 'Search',
-                                params: {data:data},
-                            });
-                        }
-                    })
-                    .catch(err=>console.log(err))
-
             },
             // 提交预言
             // sureGuess() {
@@ -240,8 +229,8 @@
             //     }
             // },
         },
-        created() {
-
+        mounted() {
+            this.$refs.toplist.getToplist()
         },
         beforeCreate() {
             let obj = {
@@ -251,10 +240,6 @@
                 accountName: this.$route.query.accountName,
             };
             store.commit('SET_CHAININFO', obj);
-        },
-        mounted() {
-
-
         },
     };
 </script>

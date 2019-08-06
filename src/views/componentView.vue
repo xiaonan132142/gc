@@ -42,6 +42,7 @@
         components: {
             XButton
         },
+        props:['parentData'],
         data() {
             return {
                 list: [
@@ -170,22 +171,40 @@
                 this.$router.go(-1)
             },
             checkComment(val) {
-                console.log(val)
                 this.$router.push({
-                    name:'Comments',
-                    params:{id:val}
+                    name:'Check',
+                    params:{id:val,from:'checkComment'}
                 })
             },
             handleRouter(item) {
                 if (!item.isfree && !item.isbuy) {
-                    this.showToast = true
-                    this.errorMsg = '请先解锁'
+                    //调用钱包
                     return
                 }
                 this.$router.push({
                     name: 'Check',
                     params: item,
                 })
+            },
+            getToplist() {
+                this.axios.get(this.GLOBAL.baseUrl + '/classification/getAll')
+                    .then((res) => {
+                        let {state, data} = res.data
+                        if (state === 'success') {
+                            this.list =  data
+                        }
+                    })
+                    .catch(err => console.log(err))
+            },
+            getResultlist() {
+                this.axios.get(this.GLOBAL.baseUrl + '/classification/getAll',{keyword:this.parentData})
+                    .then((res) => {
+                        let {state, data} = res.data
+                        if (state === 'success') {
+                            this.list =  data
+                        }
+                    })
+                    .catch(err => console.log(err))
             },
         },
     }

@@ -10,8 +10,8 @@
                 <div class="header">
                     <span>第{{index+1}}步</span>
                     <div>
-                        <button @click="handleAdd" v-if="!item.addModel.desc" class="btn addbtn">点击添加内容</button>
-                        <button @click="handleAdd" v-else class="btn addbtn">编辑</button>
+                        <button @click="handleAdd(index,'add')" v-if="!item.addModel.desc" class="btn addbtn">点击添加内容</button>
+                        <button @click="handleAdd(item,'edit')" v-else class="btn addbtn">编辑</button>
                         <button v-if="index>0" class="btn delbtn" @click="delStep(item)">X</button>
                     </div>
                 </div>
@@ -91,8 +91,11 @@
                     this.contentlist.splice(index, 1)
                 }
             },
-            handleAdd() {
-                this.$router.push('Add')
+            handleAdd(data,name) {
+                this.$router.push({
+                    name:'Add',
+                    params:{data:data,name:name}
+                })
             },
             handleChange(val) {
                 this.switchVal = val

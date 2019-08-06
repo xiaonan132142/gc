@@ -49,7 +49,7 @@
             handleRouter(name) {
                this.$router.push({
                    name:'Article',
-                   params:name,
+                   params:{name:name},
                })
             },
             handlePub(){

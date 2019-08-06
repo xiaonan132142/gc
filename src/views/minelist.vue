@@ -15,6 +15,7 @@
 <script>
     export default {
         name: "minelist",
+        props:['parentData'],
         data() {
             return {
                 list: [{
@@ -109,6 +110,17 @@
             },
             deleteItem(item) {
                 console.log(item)
+                let params={
+                    id:item.id
+                }
+                this.axios.post(this.GLOBAL.baseUrl + 'url',params)
+                    .then((res) => {
+                        let {state, data} = res.data
+                        if (state === 'success') {
+                            this.list =  data
+                        }
+                    })
+                    .catch(err => console.log(err))
             },
             touchStart(item) {
                 let touchs = event.changedTouches[0];
@@ -136,11 +148,16 @@
                     this.candelete = {};
                 }
             },
-            getDeblocking() {
-                console.log('解锁')
-            },
-            getPublic() {
-                console.log('发布')
+            getlist(){
+                let url = this.parentData==='public'?'/classification/getAll':'/classification/getAll'
+                this.axios.get(this.GLOBAL.baseUrl + url,{name:this.parentData})
+                    .then((res) => {
+                        let {state, data} = res.data
+                        if (state === 'success') {
+                            this.list =  data
+                        }
+                    })
+                    .catch(err => console.log(err))
             },
         },
 
