@@ -4,24 +4,27 @@
             <button @click="goback" class="btn goback-btn">返回上一层</button>
             <button @click="toAdd" class="public-btn"><span v-if="name==='add'">添加</span><span v-else>保存</span></button>
         </div>
+        <div class="tip">
+            请将同类垃圾放到同一步骤
+        </div>
         <div class="single-block">
             <div class="step">
                 第{{model.index+1}}步
             </div>
-            <x-textarea class="area" :max="50" placeholder="请输入内容" v-model="desc"></x-textarea>
+            <x-textarea class="area" :max="50" placeholder="请将描述填写完整，图文并茂更有助于好评哦!" v-model="desc"></x-textarea>
             <uploader
-                    :max="1"
-                    :images="imagesUrl"
-                    :handle-click="true"
-                    :show-header="false"
-                    :readonly="false"
-                    :upload-url="uploadUrl"
-                    name="img"
-                    :params="params"
-                    size="small"
-                    @preview="previewMethod"
-                    @add-image="addImageMethod"
-                    @remove-image="removeImageMethod"
+                :max="1"
+                :images="imagesUrl"
+                :handle-click="true"
+                :show-header="false"
+                :readonly="false"
+                :upload-url="uploadUrl"
+                name="img"
+                :params="params"
+                size="small"
+                @preview="previewMethod"
+                @add-image="addImageMethod"
+                @remove-image="removeImageMethod"
             ></uploader>
             <checker v-model="sort" default-item-class="default-tag" selected-item-class="selected-tag">
                 <checker-item value="1">干垃圾</checker-item>
@@ -30,6 +33,7 @@
                 <checker-item value="4">不可回收</checker-item>
             </checker>
         </div>
+        <toast v-show="showToast">{{errorMsg}}</toast>
     </div>
 </template>
 
@@ -58,6 +62,8 @@
         },
         data() {
             return {
+                showToast:false,
+                errorMsg:'',
                 titleVal: '',
                 imagesUrl: [],
                 uploadUrl: '',
@@ -76,6 +82,11 @@
                 this.$router.go(-1)
             },
             toAdd() {
+                if(this.desc==''){
+                    this.showToast=true
+                    this.errorMsg='请填写内容'
+                    return
+                }
                 this.model = {
                     id: this.model.id,
                     index: this.model.index,

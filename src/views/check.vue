@@ -2,32 +2,41 @@
     <div class="gc-check">
         <button @click="goback" class="btn goback-btn">返回上一层</button>
         <div class="content-wrap">
-            <div class="title">{{parentData.title}}</div>
+            <div class="title">{{modelData.title}}</div>
             <div class="article-info">
                 <div class="author">
-                    <img src="../assets/img/user.jpg" width="25px" height="25px" alt="">
-                    <span class="name">accountname</span>
+                    <img :src="modelData.user.avatar" width="25px" height="25px" alt="">
+                    <span class="name">{{modelData.user.username}}</span>
                 </div>
                 <span class="date">2019/07/19</span>
             </div>
-            <div class="single-block" v-for="(item,index) in parentData.contents">
+            <div class="single-block" v-for="(item,index) in modelData.contents">
                 <div class="step">第{{index+1}}步</div>
                 <div class="desc">{{item.desc}}</div>
                 <img :src="item.image" width="100%" height="181px" alt="">
+                <div class="tag-class">{{item.sort}}</div>
             </div>
-            <div class="comment-list">
+            <div class="comment-list" v-if="commentList">
                 <div class="title">评价</div>
                 <div class="comment-item" v-for="(item,index) in commentList">
-                    <img class="avatar" src="../assets/img/user.jpg" alt="">
+                    <img class="avatar" :src="item.user.avatar" alt="">
                     <div class="comment-info">
-                        <span class="accountname">{{item.accountname}}</span>
-                        <span class="content">{{item.content}}</span>
-                        <span class="date">{{item.date}}</span>
+                        <span class="accountname">{{item.user.username}}</span>
+                        <span class="content">
+                            <img v-if="item.attitude=='1'" src="../assets/img/goodSelect.png" width="12px" height="11px"
+                                 alt="">
+                            <img v-if="item.attitude=='-1'" src="../assets/img/sadSelect.png" width="12px" height="11px"
+                                 alt="">
+                            <span v-if="item.contents">{{item.contents[0].desc}}</span>
+                        </span>
+                        <span v-if="item.contents" class="date">{{item.contents[0].time}}</span>
                     </div>
                 </div>
             </div>
             <div class="comment" v-if="showComment">
                 <checker
+                        type="radio"
+                        :radio-required="isrequired"
                         :max="1"
                         @on-change="changeCheck"
                         v-model="radioValue"
@@ -40,7 +49,7 @@
                                 <img v-if="radioValue!='1'" src="../assets/img/good.png" width="24px" height="22px"
                                      alt="">
                                 <img v-else src="../assets/img/goodSelect.png" width="24px" height="22px" alt="">
-                                <span class="num">2</span>
+                                <span class="num">{{modelData.upCount}}</span>
                             </div>
                         </template>
                     </checker-item>
@@ -50,7 +59,7 @@
                                 <img v-if="radioValue!='-1'" src="../assets/img/sad.png" width="24px" height="22px"
                                      alt="">
                                 <img v-else src="../assets/img/sadSelect.png" width="24px" height="22px" alt="">
-                                <span class="num">2</span>
+                                <span class="num">{{modelData.downCount}}</span>
                             </div>
                         </template>
                     </checker-item>
@@ -74,22 +83,14 @@
         },
         data() {
             return {
+                isrequired: true,
                 showComment: true,
                 isComment: true,
                 parentData: {},
-                commentList: [
-                    {
-                        avatar: '',
-                        accountname: '11111',
-                        content: '收到回复速度较快放寒假看对方收到回复速度较快放寒假看对方收到回复速度较快放寒假看对方',
-                        date: '2019/07.19'
-                    },
-                    {avatar: '', accountname: '11111', content: '收到回复速度较快放寒假看对方', date: '2019/07.19'},
-                    {avatar: '', accountname: '11111', content: '收到回复速度较快放寒假看对方', date: '2019/07.19'},
-                ],
+                commentList: [],
                 radioValue: '',
                 comment: '',
-                articleId: '',
+                modelData: {},
             }
         },
         computed: {
@@ -101,38 +102,61 @@
             this.parentData = this.$route.params
             console.log(this.parentData)
             let {_id, from} = this.parentData
+            // 查看评价不可评价
             this.showComment = !(from === 'checkComment')
-            this.articleId = _id
+            this.getArticle(_id)
         },
         methods: {
             goback() {
                 this.$router.go(-1)
             },
+            getArticle(id) {
+                this.axios.get(this.GLOBAL.baseUrl + `/classification/getById?id=${id}`)
+                    .then(res => {
+                        let {state, data} = res.data
+                        if (state === 'success') {
+                            this.modelData = data
+                            this.commentList = data.comments
+                            this.commentList.forEach(item => {
+                                if (item.user.userId == '-QM7XbtaD') {
+                                    this.radioValue = item.attitude
+                                }
+                            })
+                        }
+                    })
+                    .catch(err => console.log(err))
+            },
             changeCheck(val) {
                 console.log(val)
                 this.radioValue = val
                 let params = {
-                    userId:'111',
+                    userId: '-QM7XbtaD',
                     classificationId: this.parentData._id,
-                    attitude:  this.radioValue,
+                    attitude: this.radioValue,
                 }
-                this.axios.post(this.GLOBAL.baseUrl + '/comment/addAttitude',params)
-                    .then((res)=>{
-                        let {state,data} = res.data
+                this.axios.post(this.GLOBAL.baseUrl + '/comment/addAttitude', params)
+                    .then((res) => {
+                        let {state, data} = res.data
+                        if (state === 'success') {
+                            this.getArticle(this.parentData._id)
+                        }
                     })
-                    .catch(err=>console.log(err))
+                    .catch(err => console.log(err))
             },
             submit() {
                 let params = {
-                    userId:'111',
+                    userId: '-QM7XbtaD',
                     classificationId: this.parentData._id,
-                    content:  this.comment,
+                    content: this.comment,
                 }
-                this.axios.post(this.GLOBAL.baseUrl + '/comment/addContent',params)
-                    .then((res)=>{
-                        let {state,data} = res.data
+                this.axios.post(this.GLOBAL.baseUrl + '/comment/addContent', params)
+                    .then((res) => {
+                        let {state, data} = res.data
+                        if (state === 'success') {
+                            this.getArticle(this.parentData._id)
+                        }
                     })
-                    .catch(err=>console.log(err))
+                    .catch(err => console.log(err))
             },
         },
     }

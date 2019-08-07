@@ -29,6 +29,7 @@
                 </div>
                 <button class="btn check-btn" @click.stop="checkComment(item.id)">查看评论</button>
             </div>
+            <div><span v-for="(item,index) in item.contents" :class="[item && item.sort?'tag-class':'']">{{item.sort}}</span></div>
         </div>
     </div>
 </template>

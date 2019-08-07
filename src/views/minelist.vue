@@ -23,6 +23,7 @@
                 </div>
                 <button class="btn check-btn" @click.stop="checkComment(item._id)">查看评论</button>
             </div>
+            <div><span v-for="(item,index) in item.contents" :class="[item && item.sort?'tag-class':'']">{{item.sort}}</span></div>
             <div class="del" @click.stop="deleteItem(item)"><span>删除</span></div>
         </li>
     </ul>
@@ -155,5 +156,21 @@
         width:50px;
         color:#00C691;
     }
+    .tag-class{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 80px;
+        height: 15px;
+        line-height: 15px;
+        padding:3px 10px;
+        margin:0 10px 10px 0;
+        border:1px solid #00C691;
+        background-color:#00C691;
+        border-radius: 5px;
+        color:#fff;
+        font-size: 12px;
+    }
+
 </style>
 

@@ -47,6 +47,7 @@
                 </div>
             </x-dialog>
         </div>
+        <toast v-show="showToast">{{errorMsg}}</toast>
     </div>
 </template>
 
@@ -54,7 +55,7 @@
     import cache from '@/utils/cache';
     import '../assets/scss/public.scss'
     import {mapGetters} from 'vuex'
-    import {XInput, XButton, XSwitch, XDialog, TransferDomDirective as TransferDom, Checklist} from 'vux'
+    import {Toast, XInput, XButton, XSwitch, XDialog, TransferDomDirective as TransferDom, Checklist} from 'vux'
 
     export default {
         name: "public",
@@ -62,10 +63,12 @@
             TransferDom,
         },
         components: {
-            XInput, XButton, XDialog, XSwitch, Checklist
+            XInput, XButton, XDialog, XSwitch, Checklist, Toast
         },
         data() {
             return {
+                showToast: false,
+                errorMsg: '',
                 titleVal: '',
 
                 commonList: [
@@ -96,6 +99,11 @@
                 console.log(cache.get('contentsModel'))
             },
             toPublc() {
+                if (this.titleVal == '') {
+                    this.showToast = true
+                    this.errorMsg = '请填写标题'
+                    return
+                }
                 this.showDialog = true
             },
             addStep() {
@@ -125,7 +133,7 @@
             },
             submit() {
                 let arr = []
-                this.contentlist.forEach(item=>{
+                this.contentlist.forEach(item => {
                     arr.push(item.addModel)
                 })
                 let params = {
@@ -137,8 +145,8 @@
                 }
                 this.axios.post(this.GLOBAL.baseUrl + '/classification/publish', params)
                     .then((res) => {
-                        let {state,data} = res.data
-                        if(state==='success'){
+                        let {state, data} = res.data
+                        if (state === 'success') {
                             this.showDialog = false
                             this.$router.push('SuccessModel')
                             cache.set('contentsModel', [])
