@@ -29,13 +29,15 @@
         },
         created(){
             this.keyword = this.$router.currentRoute.params.keyword
+        },
+        mounted(){
             this.$refs.resultlist.getResultlist()
         },
         methods: {
             goback() {
                 this.$router.go(-1)
             },
-            search(){
+            search() {
                 this.$refs.resultlist.getResultlist()
             },
         },

@@ -4,102 +4,46 @@
             v-for="(item,index) in list"
             :key="index"
             @click="checkDesc(item)"
-            :class="{move:candelete.id==item.id}"
+            :class="{move:candelete._id==item._id}"
             @touchstart="touchStart(item)"
             @touchend="touchEnd(item)">
-            {{item.title}}{{item.id}}
-            <div class="del" @click.stop="deleteItem(item)">删除</div>
+            <div class="dec-block">
+                <div>{{item.title}}</div>
+                <div class="userinfo">
+                    <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
+                    <span>{{item.accountName}}</span>
+                </div>
+                <div class="content">{{item.contents&&item.contents[0].desc}}</div>
+            </div>
+            <div class="article-info">
+                <div class="info">
+                    <span class="price" v-if="!item.free">{{item.price}} 垃圾币</span>
+                    <span class="comment">{{item.commentCount}}条评论</span>
+                    <span>{{item.date}}</span>
+                </div>
+                <button class="btn check-btn" @click.stop="checkComment(item._id)">查看评论</button>
+            </div>
+            <div class="del" @click.stop="deleteItem(item)"><span>删除</span></div>
         </li>
     </ul>
 </template>
 <script>
+    import '../assets/scss/componentView.scss'
+    import {mapGetters} from 'vuex'
     export default {
         name: "minelist",
         props:['parentData'],
         data() {
             return {
-                list: [{
-                    id: 1,
-                    title: '请左滑动删除我吧',
-                    contents:[
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'1发开始的减肥开始疯狂上岛咖啡开始的房间看了世界仿佛都是开发建设的咖啡开始',
-                                imgdata:'',
-                            },
-                        },
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'1发开始的减肥开始疯狂上岛咖啡开始的房',
-                                imgdata:'',
-                            },
-                        },
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'1发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房',
-                                imgdata:'',
-                            },
-                        }
-                    ],
-                }, {
-                    id: 2,
-                    title: '请左滑动删除我吧',
-                    contents:[
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'2发开始的减肥开始疯狂上岛咖啡开始的房间看了世界仿佛都是开发建设的咖啡开始',
-                                imgdata:'',
-                            },
-                        },
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'2发开始的减肥开始疯狂上岛咖啡开始的房',
-                                imgdata:'',
-                            },
-                        },
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'2发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房',
-                                imgdata:'',
-                            },
-                        }
-                    ],
-                }, {
-                    id: 3,
-                    title: '请左滑动删除我吧',
-                    contents:[
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'3发开始的减肥开始疯狂上岛咖啡开始的房间看了世界仿佛都是开发建设的咖啡开始',
-                                imgdata:'',
-                            },
-                        },
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'3发开始的减肥开始疯狂上岛咖啡开始的房',
-                                imgdata:'',
-                            },
-                        },
-                        {
-                            id: Date.now(),
-                            editModel:{
-                                decs:'3发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房发开始的减肥开始疯狂上岛咖啡开始的房',
-                                imgdata:'',
-                            },
-                        }
-                    ],
-                }],
+                list: [],
                 clientNum: {}, // 记录开始滑动（x1）,结束滑动（x2）的鼠标指针的位置
                 candelete: {}, // 滑动的item
             }
+        },
+        computed: {
+            ...mapGetters([
+                'userInfo',
+            ]),
         },
         methods: {
             checkDesc(item){
@@ -109,15 +53,11 @@
                 })
             },
             deleteItem(item) {
-                console.log(item)
-                let params={
-                    id:item.id
-                }
-                this.axios.post(this.GLOBAL.baseUrl + 'url',params)
+                this.axios.post(this.GLOBAL.baseUrl + '/classification/takeOff',{id:item._id})
                     .then((res) => {
                         let {state, data} = res.data
-                        if (state === 'success') {
-                            this.list =  data
+                        if (state=== "success") {
+                            this.getlist()
                         }
                     })
                     .catch(err => console.log(err))
@@ -149,8 +89,8 @@
                 }
             },
             getlist(){
-                let url = this.parentData==='public'?'/classification/getAll':'/classification/getAll'
-                this.axios.get(this.GLOBAL.baseUrl + url,{name:this.parentData})
+                let url = this.parentData==='public'?'/classification/getPublishedByUser?userId=-QM7XbtaD':'/read/getAllByUserId?userId=-QM7XbtaD'
+                this.axios.get(this.GLOBAL.baseUrl + url)
                     .then((res) => {
                         let {state, data} = res.data
                         if (state === 'success') {
@@ -174,6 +114,7 @@
         padding-left: 10px;
     }
 
+
     ul {
         overflow-x: hidden; /*隐藏ul x轴的滚动条*/
     }
@@ -193,6 +134,26 @@
         color: #fff;
         background-color: #ff5b45;
         transform: translateX(60px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .userinfo{
+        height:17px;
+        display: flex;
+        justify-content: flex-start;
+
+    }
+    .article-info {
+        font-size: 12px;
+        color: rgba(0, 0, 0, .4);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .check-btn{
+        width:50px;
+        color:#00C691;
     }
 </style>
 

@@ -22,6 +22,23 @@
         color:rgba(0,0,0,.4);
         line-height: 22px;
       }
+      .vux-checker-box{
+        margin-top: 10px;
+        @include flex-row(row,space-between);
+      }
+      .default-tag{
+        background-color:#f5f5f5;
+        border:1px solid #f5f5f5;
+        border-radius: 5px;
+        text-align: center;
+        padding:3px 10px;
+
+      }
+      .selected-tag{
+        border:1px solid #00C691;
+        background-color:#00C691;
+        color:#fff;
+      }
     }
   }
 }

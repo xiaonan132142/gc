@@ -39,7 +39,6 @@
   .dec-block{
     @include flex-row(column,flex-start,flex-start);
     margin:12px 0 8px;
-
   }
   .article-info{
     font-size: 12px;
@@ -57,7 +56,7 @@
     }
     .check-btn{
       width:50px;
-      color:#FF8D00;
+      color:#00C691;
     }
   }
 }

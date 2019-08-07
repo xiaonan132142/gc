@@ -33,6 +33,7 @@
 <script>
     import '../assets/scss/mine.scss'
     import {XButton, ButtonTab, ButtonTabItem} from 'vux'
+    import {mapGetters} from 'vuex'
 
     export default {
         name: "mine",
@@ -42,9 +43,14 @@
                 tabIndex: 0,
             }
         },
+        computed: {
+            ...mapGetters([
+                'userInfo',
+            ]),
+        },
         methods: {
             goback() {
-                this.$router.go(-1)
+                this.$router.push('/')
             },
             handleRouter(name) {
                this.$router.push({
