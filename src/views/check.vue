@@ -10,7 +10,7 @@
                 </div>
                 <span class="date">2019/07/19</span>
             </div>
-            <div class="single-block" v-for="(item,index) in modelData.contents">
+            <div v-if="showComment" class="single-block" v-for="(item,index) in modelData.contents">
                 <div class="step">第{{index+1}}步</div>
                 <div class="desc">{{item.desc}}</div>
                 <img :src="item.image" width="100%" height="181px" alt="">
@@ -123,8 +123,6 @@
                                     this.radioValue = item.attitude
                                 }
                             })
-                            // this.modelData.user.avatar=this.modelData.user&&this.modelData.user.avatar?this.modelData.user.avatar:defaultAvatar
-                            // this.modelData.user.accountname=this.modelData.user&&this.modelData.user.accountname?this.modelData.user.accountname:'用户'
                         }
                     })
                     .catch(err => console.log(err))

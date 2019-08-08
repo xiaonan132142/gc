@@ -103,7 +103,7 @@
             checkComment(val) {
                 this.$router.push({
                     name: 'Check',
-                    params: {id: val, from: 'checkComment'}
+                    params: {_id: val, from: 'checkComment'}
                 })
             },
         },

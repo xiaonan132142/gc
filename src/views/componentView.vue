@@ -27,7 +27,7 @@
                     <span class="comment">1条评论</span>
                     <span>{{item.date}}</span>
                 </div>
-                <button class="btn check-btn" @click.stop="checkComment(item.id)">查看评论</button>
+                <button class="btn check-btn" @click.stop="checkComment(item._id)">查看评论</button>
             </div>
             <div><span v-for="(item,index) in item.contents"
                        :class="[item && item.sort?'tag-class':'']">{{item.sort}}</span></div>
@@ -69,11 +69,10 @@
             checkComment(val) {
                 this.$router.push({
                     name: 'Check',
-                    params: {id: val, from: 'checkComment'}
+                    params: {_id: val, from: 'checkComment'}
                 })
             },
             handleRouter(item) {
-                console.log(item)
                 if (item.free || item.hasRead) {
                     this.$router.push({
                         name: 'Check',
