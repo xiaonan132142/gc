@@ -54,25 +54,28 @@
           font-weight: 700;
         }
         .comment-item{
-          @include flex-row(row,sapce-between,flex-start);
+          @include flex-row(column,sapce-between,flex-start);
           border-bottom: 1px solid #EDEDED;
           padding:22px 0 14px;
-          .avatar{
-            @include block(38px);
+          .user{
+            height: 38px;
+            margin-bottom: 9px;
+            @include flex-row();
+            .avatar{
+              @include block(38px);
+            }
+            .accountname{
+              font-size: 15px;
+              color:rgba(0,0,0,.4);
+            }
           }
           .comment-info{
             @include flex-row(column,flex-start,flex-start);
-            .accountname{
-              margin-bottom: 9px;
-              font-size: 15px;
-              line-height: 21px;
-              color:rgba(0,0,0,.4);
-            }
             .content{
               color:rgba(0,0,0,.8);
               font-size: 14px;
               line-height: 20px;
-              margin-bottom: 3px;
+              margin:8px 0 3px 0;
             }
             .date{
               color:rgba(0,0,0,.2);

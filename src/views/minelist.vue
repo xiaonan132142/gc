@@ -100,6 +100,12 @@
                     })
                     .catch(err => console.log(err))
             },
+            checkComment(val) {
+                this.$router.push({
+                    name: 'Check',
+                    params: {id: val, from: 'checkComment'}
+                })
+            },
         },
 
     }
@@ -151,6 +157,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    .info {
+        flex: 1;
+    }
+    .price{
+        color:#FF8D00;
+        margin-right: 10px;
+    }
+    .comment{
+        margin-right: 12px;
     }
     .check-btn{
         width:50px;

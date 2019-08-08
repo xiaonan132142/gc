@@ -47,7 +47,7 @@
                 </div>
             </x-dialog>
         </div>
-        <toast v-show="showToast">{{errorMsg}}</toast>
+        <toast v-model="showToast" type="text">{{errorMsg}}</toast>
     </div>
 </template>
 
@@ -70,7 +70,6 @@
                 showToast: false,
                 errorMsg: '',
                 titleVal: '',
-
                 commonList: [
                     {key: '1', value: '免费', inlineDesc: '用户可免费查看'},
                     {key: '2', value: '付费', inlineDesc: '用户需付费才能查看'},

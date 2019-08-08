@@ -13,19 +13,17 @@
             </div>
             <x-textarea class="area" :max="50" placeholder="请将描述填写完整，图文并茂更有助于好评哦!" v-model="desc"></x-textarea>
             <uploader
-                :max="1"
-                :images="imagesUrl"
-                :handle-click="true"
-                :show-header="false"
-                :readonly="false"
-                :upload-url="uploadUrl"
-                name="img"
-                :params="params"
-                size="small"
-                @preview="previewMethod"
-                @add-image="addImageMethod"
-                @remove-image="removeImageMethod"
-            ></uploader>
+                :limit="1"
+                :multiple="false"
+                v-model="fileList"
+                :url="remoteUrl"
+                @on-change="onChange"
+                @on-cancel="onCancel"
+                @on-success="onSuccess"
+                @on-error="onError"
+                @on-delete="onDelete"
+            >
+            </uploader>
             <checker v-model="sort" default-item-class="default-tag" selected-item-class="selected-tag">
                 <checker-item value="1">干垃圾</checker-item>
                 <checker-item value="2">湿垃圾</checker-item>
@@ -33,14 +31,14 @@
                 <checker-item value="4">不可回收</checker-item>
             </checker>
         </div>
-        <toast v-show="showToast">{{errorMsg}}</toast>
+        <toast v-model="showToast" type="text">{{errorMsg}}</toast>
     </div>
 </template>
 
 <script>
     import cache from '@/utils/cache';
     import '../assets/scss/add.scss'
-    import Uploader from 'vux-uploader'
+    import Uploader from 'vux-uploader-component'
     import {XTextarea,Checker, CheckerItem} from 'vux'
 
     export default {
@@ -62,12 +60,10 @@
         },
         data() {
             return {
+                remoteUrl:'',
                 showToast:false,
                 errorMsg:'',
                 titleVal: '',
-                imagesUrl: [],
-                uploadUrl: '',
-                params: {},
                 name: '',
                 step: '',
                 desc: '',
@@ -109,12 +105,10 @@
                     params: {name: 'add'}
                 })
             },
-            previewMethod() {
-            },
-            addImageMethod() {
-            },
-            removeImageMethod() {
-            },
+            onCancel(){},
+            onSuccess(){},
+            onError(){},
+            onDelete(){},
         },
     }
 </script>

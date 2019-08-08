@@ -6,7 +6,7 @@ import Mine from '@/views/mine'
 import Add from '@/views/add'
 import Check from '@/views/check'
 import Search from '@/views/search'
-import Article from '@/views/article'
+import ArticleComponent from '@/views/articleComponent'
 import Public from '@/views/public'
 import SuccessModel from '@/views/successModel'
 Vue.use(Router)
@@ -50,9 +50,9 @@ const router =  new Router({
       component: Search,
     },
     {
-      path:'/article',
-      name:'Article',
-      component: Article,
+      path:'/articleComponent',
+      name:'ArticleComponent',
+      component: ArticleComponent,
     },
     {
       path:'/public',

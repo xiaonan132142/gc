@@ -19,17 +19,19 @@
             <div class="comment-list" v-if="commentList">
                 <div class="title">评价</div>
                 <div class="comment-item" v-for="(item,index) in commentList">
-                    <img class="avatar" :src="item.user.avatar" alt="">
-                    <div class="comment-info">
+                    <div class="user">
+                        <img class="avatar" :src="item.user.avatar" width="38px" height="38px" alt="">
                         <span class="accountname">{{item.user.username}}</span>
+                    </div>
+                    <div class="comment-info" v-for="itm in item.contents">
                         <span class="content">
                             <img v-if="item.attitude=='1'" src="../assets/img/goodSelect.png" width="12px" height="11px"
                                  alt="">
                             <img v-if="item.attitude=='-1'" src="../assets/img/sadSelect.png" width="12px" height="11px"
                                  alt="">
-                            <span v-if="item.contents">{{item.contents[0].desc}}</span>
+                            <span v-if="item.contents">{{itm.desc}}</span>
                         </span>
-                        <span v-if="item.contents" class="date">{{item.contents[0].time}}</span>
+                        <span v-if="item.contents" class="date">{{itm.time}}</span>
                     </div>
                 </div>
             </div>
@@ -64,8 +66,7 @@
                         </template>
                     </checker-item>
                 </checker>
-                <x-input @on-blur="submit" class="areablock" :max="50" placeholder="发表你的观点吧"
-                         v-model="comment"></x-input>
+                <x-input @on-blur="submit" class="areablock" :max="50" placeholder="发表你的观点吧" v-model="comment"></x-input>
             </div>
         </div>
     </div>
@@ -75,7 +76,7 @@
     import {mapGetters} from 'vuex';
     import '../assets/scss/check.scss'
     import {Checklist, XInput, XButton, Checker, CheckerItem} from 'vux'
-
+    import {defaultAvatar} from '../../config/ultrain.js'
     export default {
         name: "check",
         components: {
@@ -122,6 +123,8 @@
                                     this.radioValue = item.attitude
                                 }
                             })
+                            // this.modelData.user.avatar=this.modelData.user&&this.modelData.user.avatar?this.modelData.user.avatar:defaultAvatar
+                            // this.modelData.user.accountname=this.modelData.user&&this.modelData.user.accountname?this.modelData.user.accountname:'用户'
                         }
                     })
                     .catch(err => console.log(err))
