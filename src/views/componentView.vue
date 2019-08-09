@@ -118,11 +118,11 @@
                 });
             },
             getWallet(item) {
-                if (item.price > this.balance) {
+                /*if (item.price > this.balance) {
                     this.errorMsg = '您的积分不足';
                     this.showToast = true;
                     return;
-                }
+                }*/
                 let postData = {
                     'chainId': this.chainInfo.chainId,                 //[必填],链ID,从url的参数中获取后回填至此
                     'contract': config.pointAccount,             //[必填],如果转账UGAS,则值为"utrio.token"，否则值为具体的发币合约的owner账号
@@ -131,27 +131,12 @@
                     'bizId': new Date().getMilliseconds(),              //[必填],业务id,用来保证同一业务不会重复转账
                     'data': {
                         'payer': this.chainInfo.accountName,
-                        'receiver': config.poolAccount,           //[必填],收款账号，一般为商家的账号
-                        'quantity': (parseInt(this.selectCount[0]) - 2) + ' UPOINT',           //[必填],数量及单位，如果是UGAS,则比如"100.0000 UGAS"
-                        'memo': 'predict to pool',                        //[必填],值可以空
+                        'receiver': item.accountName,           //[必填],收款账号，一般为商家的账号
+                        'quantity': item.price + ' GC',           //[必填],数量及单位，如果是UGAS,则比如"100.0000 UGAS"
+                        'memo': 'pay for read',                        //[必填],值可以空
                     },
                 };
-
-                let postData2 = {
-                    'chainId': this.chainInfo.chainId,                 //[必填],链ID,从url的参数中获取后回填至此
-                    'contract': config.pointAccount,             //[必填],如果转账UGAS,则值为"utrio.token"，否则值为具体的发币合约的owner账号
-                    'action': 'transfer',                   //[必填],转账业务，值为固定的值"transfer"
-                    'type': 'transfer',                     //[必填],转账业务的固定值为"transfer"
-                    'bizId': new Date().getMilliseconds(),              //[必填],业务id,用来保证同一业务不会重复转账
-                    'data': {
-                        'payer': this.chainInfo.accountName,
-                        'receiver': config.gainAccount,           //[必填],收款账号，一般为商家的账号
-                        'quantity': '2 UPOINT',           //[必填],数量及单位，如果是UGAS,则比如"100.0000 UGAS"
-                        'memo': 'predict to fee',                        //[必填],值可以空
-                    },
-                };
-
-                let data = [postData, postData2];
+                let data = postData;
                 if (window.postMessage) {
                     console.log('sending data to webview...', JSON.stringify(data));
                     window.postMessage(JSON.stringify(data));
