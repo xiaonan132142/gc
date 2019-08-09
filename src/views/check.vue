@@ -103,9 +103,10 @@
             this.parentData = this.$route.params
             console.log(this.parentData)
             let {_id, from} = this.parentData
+            this.getArticle(_id)
+            this.setRead(_id)
             // 查看评价不可评价
             this.showComment = !(from === 'checkComment')
-            this.getArticle(_id)
         },
         methods: {
             goback() {
@@ -124,6 +125,17 @@
                                 }
                             })
                         }
+                    })
+                    .catch(err => console.log(err))
+            },
+            setRead(id) {
+                let params={
+                    userId:'-QM7XbtaD',
+                    classificationId:id,
+                }
+                this.axios.post(this.GLOBAL.baseUrl + '/read/add',params)
+                    .then(res => {
+                        let {state, data} = res.data
                     })
                     .catch(err => console.log(err))
             },

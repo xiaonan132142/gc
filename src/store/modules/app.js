@@ -8,31 +8,14 @@ const app = {
       phoneNum: '',
       accountName: '',
     },
-    predictInfo: {
-      predictRank: 0,
-      predictTimes: 0,
-      isFinished: false,
-      isWin: false,
-      awardResult: 0,
-    },
-    rankInfo:{
-      predictRank: 0,
-      predictTimes: 0,
-      winRank: 0,
-      winRatio: 0,
-      winTimes: 0,
-      awardTimes: 0,
-    },
     chainInfo: {
       chainId: '',
       userId: '',
       phoneNum: '',
       accountName: '',
     },
-    awardInfo: {
-      awardDate: '',
-      awardId: '',
-      awardResult: 0,
+    mineObj: {
+      value:''
     },
   },
   mutations: {
@@ -42,17 +25,11 @@ const app = {
     SET_USERINFO: (state, obj) => {
       state.userInfo = obj;
     },
-    SET_RANKINFO: (state, obj) => {
-      state.rankInfo = obj;
-    },
-    SET_PREDICTINFO: (state, obj) => {
-      state.predictInfo = obj;
-    },
     SET_CHAININFO: (state, obj) => {
       state.chainInfo = obj;
     },
-    SET_AWARDINFO: (state, obj) => {
-      state.awardInfo = obj;
+    SET_MINEOBJ: (state, obj) => {
+      state.mineObj = obj;
     },
   },
 };

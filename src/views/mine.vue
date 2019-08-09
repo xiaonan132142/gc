@@ -32,6 +32,7 @@
 <script>
     import {createU3} from 'u3.js';
     import config from '../../config/ultrain';
+    import store from '../store';
     import '../assets/scss/mine.scss'
     import {XButton, ButtonTab, ButtonTabItem} from 'vux'
     import {mapGetters} from 'vuex'
@@ -58,10 +59,11 @@
                 this.$router.push('/')
             },
             handleRouter(name) {
-               this.$router.push({
-                   name:'ArticleComponent',
-                   params:{name:name},
-               })
+               this.$router.push('ArticleComponent')
+               let obj={
+                   value:name
+               }
+               store.commit('SET_MINEOBJ',obj)
             },
             handlePub(){
                 this.$router.push('Public')

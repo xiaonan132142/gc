@@ -2,7 +2,7 @@
     <div class="gc-article">
         <button @click="goback" class="btn goback-btn">返回上一层</button>
         <div class="article-list">
-            <minelist :parentData="frompage" ref="minelistRef"></minelist>
+            <minelist ref="minelistRef"></minelist>
         </div>
     </div>
 </template>
@@ -17,11 +17,8 @@
         },
         data(){
             return{
-                frompage:''
+
             }
-        },
-        created(){
-            this.frompage = this.$router.currentRoute.params.name
         },
         mounted(){
             this.$refs.minelistRef.getlist()

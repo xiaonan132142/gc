@@ -13,15 +13,15 @@
             </div>
             <x-textarea class="area" :max="50" placeholder="请将描述填写完整，图文并茂更有助于好评哦!" v-model="desc"></x-textarea>
             <uploader
-                :limit="1"
-                :multiple="false"
-                v-model="fileList"
-                :url="remoteUrl"
-                @on-change="onChange"
-                @on-cancel="onCancel"
-                @on-success="onSuccess"
-                @on-error="onError"
-                @on-delete="onDelete"
+                    :limit="1"
+                    :multiple="false"
+                    v-model="fileList"
+                    :url="remoteUrl"
+                    @on-change="onChange"
+                    @on-cancel="onCancel"
+                    @on-success="onSuccess"
+                    @on-error="onError"
+                    @on-delete="onDelete"
             >
             </uploader>
             <checker v-model="sort" default-item-class="default-tag" selected-item-class="selected-tag">
@@ -39,12 +39,12 @@
     import cache from '@/utils/cache';
     import '../assets/scss/add.scss'
     import Uploader from 'vux-uploader-component'
-    import {XTextarea,Checker, CheckerItem} from 'vux'
+    import {XTextarea, Checker, CheckerItem} from 'vux'
 
     export default {
         name: "add",
         components: {
-            XTextarea, Uploader,Checker, CheckerItem
+            XTextarea, Uploader, Checker, CheckerItem
         },
         created() {
             let {data, name} = this.$router.currentRoute.params
@@ -60,9 +60,9 @@
         },
         data() {
             return {
-                remoteUrl:'',
-                showToast:false,
-                errorMsg:'',
+                remoteUrl: '',
+                showToast: false,
+                errorMsg: '',
                 titleVal: '',
                 name: '',
                 step: '',
@@ -70,7 +70,7 @@
                 imgurl: '',
                 model: {},
                 contents: [],
-                sort:'',
+                sort: '',
             }
         },
         methods: {
@@ -78,15 +78,15 @@
                 this.$router.go(-1)
             },
             toAdd() {
-                if(this.desc==''){
-                    this.showToast=true
-                    this.errorMsg='请填写内容'
+                if (this.desc == '') {
+                    this.showToast = true
+                    this.errorMsg = '请填写内容'
                     return
                 }
                 this.model = {
                     id: this.model.id,
                     index: this.model.index,
-                    addModel: {desc: this.desc, image: this.imgurl,sort:this.sort}
+                    addModel: {desc: this.desc, image: this.imgurl, sort: this.sort}
                 }
                 if (this.name === 'add') {
                     this.contents.push(this.model)
@@ -105,10 +105,34 @@
                     params: {name: 'add'}
                 })
             },
-            onCancel(){},
-            onSuccess(){},
-            onError(){},
-            onDelete(){},
+            getUrlBase64(url, ext, callback) {
+                var canvas = document.createElement("canvas");   //创建canvas DOM元素
+                var ctx = canvas.getContext("2d");
+                var img = new Image;
+                img.crossOrigin = 'Anonymous';
+                img.src = url;
+                img.onload = function () {
+                    canvas.height = 60; //指定画板的高度,自定义
+                    canvas.width = 85; //指定画板的宽度，自定义
+                    ctx.drawImage(img, 0, 0, 60, 85); //参数可自定义
+                    var dataURL = canvas.toDataURL("image/" + ext);
+                    callback.call(this, dataURL); //回掉函数获取Base64编码
+                    canvas = null;
+                };
+            },
+            onChange(FileItem, FileList) {
+                this.getUrlBase64(path, ext, (base64)=> {
+                    console.log(base64);//base64编码值
+                });
+            },
+            onCancel() {
+            },
+            onSuccess(result, fileItem) {
+            },
+            onError() {
+            },
+            onDelete() {
+            },
         },
     }
 </script>

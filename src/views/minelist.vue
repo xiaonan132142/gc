@@ -1,12 +1,12 @@
 <template>
     <ul>
         <li
-            v-for="(item,index) in list"
-            :key="index"
-            @click="checkDesc(item)"
-            :class="{move:candelete._id==item._id}"
-            @touchstart="touchStart(item)"
-            @touchend="touchEnd(item)">
+                v-for="(item,index) in list"
+                :key="index"
+                @click="checkDesc(item)"
+                :class="{move:candelete._id==item._id}"
+                @touchstart="touchStart(item)"
+                @touchend="touchEnd(item)">
             <div class="dec-block">
                 <div>{{item.title}}</div>
                 <div class="userinfo">
@@ -23,7 +23,8 @@
                 </div>
                 <button class="btn check-btn" @click.stop="checkComment(item._id)">查看评论</button>
             </div>
-            <div><span v-for="(item,index) in item.contents" :class="[item && item.sort?'tag-class':'']">{{item.sort}}</span></div>
+            <div><span v-for="(item,index) in item.contents"
+                       :class="[item && item.sort?'tag-class':'']">{{item.sort}}</span></div>
             <div class="del" @click.stop="deleteItem(item)"><span>删除</span></div>
         </li>
     </ul>
@@ -31,9 +32,9 @@
 <script>
     import '../assets/scss/componentView.scss'
     import {mapGetters} from 'vuex'
+
     export default {
         name: "minelist",
-        props:['parentData'],
         data() {
             return {
                 list: [],
@@ -44,20 +45,21 @@
         computed: {
             ...mapGetters([
                 'userInfo',
+                'mineObj'
             ]),
         },
         methods: {
-            checkDesc(item){
+            checkDesc(item) {
                 this.$router.push({
-                    name:'Check',
-                    params:item
+                    name: 'Check',
+                    params: item
                 })
             },
             deleteItem(item) {
-                this.axios.post(this.GLOBAL.baseUrl + '/classification/takeOff',{id:item._id})
+                this.axios.post(this.GLOBAL.baseUrl + '/classification/takeOff', {id: item._id})
                     .then((res) => {
                         let {state, data} = res.data
-                        if (state=== "success") {
+                        if (state === "success") {
                             this.getlist()
                         }
                     })
@@ -89,13 +91,14 @@
                     this.candelete = {};
                 }
             },
-            getlist(){
-                let url = this.parentData==='public'?'/classification/getPublishedByUser?userId=-QM7XbtaD':'/read/getAllByUserId?userId=-QM7XbtaD'
-                this.axios.get(this.GLOBAL.baseUrl + url)
+            getlist() {
+                let from = this.mineObj.value
+                let url = from === 'public' ? '/classification/getPublishedByUser' : '/read/getAllByUserId'
+                this.axios.get(this.GLOBAL.baseUrl + url + '?userId=-QM7XbtaD')
                     .then((res) => {
                         let {state, data} = res.data
                         if (state === 'success') {
-                            this.list =  data
+                            this.list = data
                         }
                     })
                     .catch(err => console.log(err))
@@ -145,12 +148,14 @@
         align-items: center;
         justify-content: center;
     }
-    .userinfo{
-        height:17px;
+
+    .userinfo {
+        height: 17px;
         display: flex;
         justify-content: flex-start;
 
     }
+
     .article-info {
         font-size: 12px;
         color: rgba(0, 0, 0, .4);
@@ -158,33 +163,38 @@
         justify-content: space-between;
         align-items: center;
     }
+
     .info {
         flex: 1;
     }
-    .price{
-        color:#FF8D00;
+
+    .price {
+        color: #FF8D00;
         margin-right: 10px;
     }
-    .comment{
+
+    .comment {
         margin-right: 12px;
     }
-    .check-btn{
-        width:50px;
-        color:#00C691;
+
+    .check-btn {
+        width: 50px;
+        color: #00C691;
     }
-    .tag-class{
+
+    .tag-class {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         max-width: 80px;
         height: 15px;
         line-height: 15px;
-        padding:3px 10px;
-        margin:0 10px 10px 0;
-        border:1px solid #00C691;
-        background-color:#00C691;
+        padding: 3px 10px;
+        margin: 0 10px 10px 0;
+        border: 1px solid #00C691;
+        background-color: #00C691;
         border-radius: 5px;
-        color:#fff;
+        color: #fff;
         font-size: 12px;
     }
 
