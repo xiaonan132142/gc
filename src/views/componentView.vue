@@ -59,7 +59,7 @@
         },
         computed: {
             ...mapGetters([
-                'userInfo',
+                'chainInfo',
             ]),
         },
         methods: {
@@ -80,13 +80,13 @@
                     })
                 } else {
                     //调用钱包
-                    if (item.price > 0) {
+                    if (item.price != 0) {
                         this.getWallet(item)
                     }
                 }
             },
             getToplist() {
-                this.axios.get(this.GLOBAL.baseUrl + '/classification/getTodayRecommend', {readerId: '-QM7XbtaD'})
+                this.axios.get(this.GLOBAL.baseUrl + '/classification/getTodayRecommend', {readerId: this.chainInfo.userId})
                     .then((res) => {
                         let {state, data} = res.data
                         if (state === 'success') {
@@ -98,7 +98,7 @@
             getResultlist() {
                 this.axios.get(this.GLOBAL.baseUrl + '/classification/getAll', {
                     keyword: this.parentData,
-                    readerId: '-QM7XbtaD'
+                    readerId: this.chainInfo.userId,
                 })
                     .then((res) => {
                         let {state, data} = res.data
@@ -113,16 +113,16 @@
                 const u3 = createU3(config);
                 this.balance = await u3.getCurrencyBalance({
                     code: config.pointAccount,
-                    account: config.poolAccount,
+                    account: this.chainInfo.accountName,
                     symbol: config.symbol,
                 });
             },
             getWallet(item) {
-                /*if (item.price > this.balance) {
-                    this.errorMsg = '您的积分不足';
-                    this.showToast = true;
-                    return;
-                }*/
+                // if (item.price > this.balance) {
+                //     this.errorMsg = '您的积分不足';
+                //     this.showToast = true;
+                //     return;
+                // }
                 let postData = {
                     'chainId': this.chainInfo.chainId,                 //[必填],链ID,从url的参数中获取后回填至此
                     'contract': config.pointAccount,             //[必填],如果转账UGAS,则值为"utrio.token"，否则值为具体的发币合约的owner账号

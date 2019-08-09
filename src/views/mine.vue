@@ -48,7 +48,7 @@
         },
         computed: {
             ...mapGetters([
-                'userInfo',
+                'chainInfo'
             ]),
         },
         created(){
@@ -73,7 +73,7 @@
                 const u3 = createU3(config);
                 this.balance = await u3.getCurrencyBalance({
                     code: config.pointAccount,
-                    account: config.poolAccount,
+                    account: this.chainInfo.accountName,
                     symbol: config.symbol,
                 });
             },

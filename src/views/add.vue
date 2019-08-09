@@ -13,8 +13,10 @@
             </div>
             <x-textarea class="area" :max="50" placeholder="请将描述填写完整，图文并茂更有助于好评哦!" v-model="desc"></x-textarea>
             <uploader
+                    title=""
                     :limit="1"
                     :multiple="false"
+                    :show-header="false"
                     v-model="fileList"
                     :url="remoteUrl"
                     @on-change="onChange"
@@ -105,7 +107,7 @@
                     params: {name: 'add'}
                 })
             },
-            getUrlBase64(url, ext, callback) {
+            /*getUrlBase64(url, ext, callback) {
                 var canvas = document.createElement("canvas");   //创建canvas DOM元素
                 var ctx = canvas.getContext("2d");
                 var img = new Image;
@@ -119,11 +121,11 @@
                     callback.call(this, dataURL); //回掉函数获取Base64编码
                     canvas = null;
                 };
-            },
+            },*/
             onChange(FileItem, FileList) {
-                this.getUrlBase64(path, ext, (base64)=> {
+                /*this.getUrlBase64(path, ext, (base64)=> {
                     console.log(base64);//base64编码值
-                });
+                });*/
             },
             onCancel() {
             },
@@ -136,5 +138,10 @@
         },
     }
 </script>
+<style scoped>
+    .vux-uploader_hd{
+        display: none !important;
+    }
+</style>
 
 
