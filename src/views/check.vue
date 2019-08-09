@@ -96,7 +96,7 @@
         },
         computed: {
             ...mapGetters([
-                'userInfo',
+                'chainInfo',
             ]),
         },
         created() {
@@ -120,7 +120,7 @@
                             this.modelData = data
                             this.commentList = data.comments
                             this.commentList.forEach(item => {
-                                if (item.user.userId == '-QM7XbtaD') {
+                                if (item.user.userId == this.chainInfo.userId) {
                                     this.radioValue = item.attitude
                                 }
                             })
@@ -130,7 +130,7 @@
             },
             setRead(id) {
                 let params={
-                    userId:'-QM7XbtaD',
+                    userId:this.chainInfo.userId,
                     classificationId:id,
                 }
                 this.axios.post(this.GLOBAL.baseUrl + '/read/add',params)
@@ -143,7 +143,7 @@
                 console.log(val)
                 this.radioValue = val
                 let params = {
-                    userId: '-QM7XbtaD',
+                    userId: this.chainInfo.userId,
                     classificationId: this.parentData._id,
                     attitude: this.radioValue,
                 }
@@ -158,7 +158,7 @@
             },
             submit() {
                 let params = {
-                    userId: '-QM7XbtaD',
+                    userId: this.chainInfo.userId,
                     classificationId: this.parentData._id,
                     content: this.comment,
                 }

@@ -44,7 +44,7 @@
         },
         computed: {
             ...mapGetters([
-                'userInfo',
+                'chainInfo',
                 'mineObj'
             ]),
         },
@@ -94,7 +94,7 @@
             getlist() {
                 let from = this.mineObj.value
                 let url = from === 'public' ? '/classification/getPublishedByUser' : '/read/getAllByUserId'
-                this.axios.get(this.GLOBAL.baseUrl + url + '?userId=-QM7XbtaD')
+                this.axios.get(this.GLOBAL.baseUrl + url + `?userId=${this.chainInfo.userId}`)
                     .then((res) => {
                         let {state, data} = res.data
                         if (state === 'success') {

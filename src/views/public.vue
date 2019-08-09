@@ -82,7 +82,7 @@
         },
         computed: {
             ...mapGetters([
-                'userInfo',
+                'chainInfo',
             ]),
         },
         created() {
@@ -136,7 +136,7 @@
                     arr.push(item.addModel)
                 })
                 let params = {
-                    userId: "-QM7XbtaD",
+                    userId: this.chainInfo.userId,
                     title: this.titleVal,
                     contents: arr,
                     free: this.switchVal == '1' ? true : false,
