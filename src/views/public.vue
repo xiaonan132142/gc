@@ -17,6 +17,7 @@
                         <button v-if="index>0" class="btn delbtn" @click="delStep(item)">X</button>
                     </div>
                 </div>
+                <div v-if="item.addModel.sort" class="tag-class">{{item.addModel.sort | filterSort}}</div>
                 <div v-if="item.addModel.desc" class="content">
                     <div class="desc">{{item.addModel.desc}}</div>
                     <img src="../assets/img/eg.png" width="100%" height="181px" alt="img">
@@ -89,7 +90,23 @@
             let from = this.$router.currentRoute.params.name
             if (from === 'add') {
                 this.contentlist = !cache.get('contentsModel') ? [] : cache.get('contentsModel')
+                this.titleVal = cache.get('title')
             }
+        },
+        filters:{
+            filterSort(val){
+                if(val==1){
+                    return '干垃圾'
+                }else if(val==2){
+                    return '湿垃圾'
+                }else if(val==3){
+                    return '其他'
+                }else if(val==4){
+                    return '不可回收'
+                }else{
+                    return;
+                }
+            },
         },
         methods: {
             goback() {
@@ -125,6 +142,7 @@
                     name: 'Add',
                     params: {data: item, name: name}
                 })
+                cache.set('title', this.titleVal)
             },
             handleChange(val) {
                 this.switchVal = val
@@ -149,6 +167,7 @@
                             this.showDialog = false
                             this.$router.push('SuccessModel')
                             cache.set('contentsModel', [])
+                            cache.set('title','')
                         }
                     })
                     .catch(err => console.log(err))

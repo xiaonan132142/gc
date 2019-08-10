@@ -23,8 +23,11 @@
         line-height: 22px;
       }
       .vux-checker-box{
-        margin-top: 10px;
+        margin: 10px 0 20px;
         @include flex-row(row,space-between);
+      }
+      .weui-textarea-counter{
+        display: none;
       }
     }
   }

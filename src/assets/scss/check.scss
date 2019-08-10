@@ -110,6 +110,7 @@
         }
         .weui-cells_checkbox{
           width: 116px;
+          margin-bottom: 15px;
           @include flex-row(row,flex-start);
         }
         .areablock{

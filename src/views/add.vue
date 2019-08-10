@@ -11,12 +11,18 @@
             <div class="step">
                 第{{model.index+1}}步
             </div>
+            <checker v-model="sort" default-item-class="default-tag" selected-item-class="selected-tag">
+                <checker-item value="1">干垃圾</checker-item>
+                <checker-item value="2">湿垃圾</checker-item>
+                <checker-item value="3">其他</checker-item>
+                <checker-item value="4">不可回收</checker-item>
+            </checker>
             <x-textarea class="area" :max="50" placeholder="请将描述填写完整，图文并茂更有助于好评哦!" v-model="desc"></x-textarea>
             <uploader
                     title=""
                     :limit="1"
                     :multiple="false"
-                    :show-header="false"
+                    show-header="false"
                     v-model="fileList"
                     :url="remoteUrl"
                     @on-change="onChange"
@@ -26,12 +32,6 @@
                     @on-delete="onDelete"
             >
             </uploader>
-            <checker v-model="sort" default-item-class="default-tag" selected-item-class="selected-tag">
-                <checker-item value="1">干垃圾</checker-item>
-                <checker-item value="2">湿垃圾</checker-item>
-                <checker-item value="3">其他</checker-item>
-                <checker-item value="4">不可回收</checker-item>
-            </checker>
         </div>
         <toast v-model="showToast" type="text">{{errorMsg}}</toast>
     </div>
@@ -41,12 +41,12 @@
     import cache from '@/utils/cache';
     import '../assets/scss/add.scss'
     import Uploader from 'vux-uploader-component'
-    import {XTextarea, Checker, CheckerItem} from 'vux'
+    import {XTextarea, Checker, CheckerItem,Toast} from 'vux'
 
     export default {
         name: "add",
         components: {
-            XTextarea, Uploader, Checker, CheckerItem
+            XTextarea, Uploader, Checker, CheckerItem,Toast
         },
         created() {
             let {data, name} = this.$router.currentRoute.params
@@ -63,6 +63,7 @@
         data() {
             return {
                 remoteUrl: '',
+                fileList:[],
                 showToast: false,
                 errorMsg: '',
                 titleVal: '',
@@ -138,10 +139,4 @@
         },
     }
 </script>
-<style scoped>
-    .vux-uploader_hd{
-        display: none !important;
-    }
-</style>
-
 

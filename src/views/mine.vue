@@ -13,14 +13,14 @@
             <div class="opration-item" @click="handleRouter('public')">
                 <span class="key">已发布</span>
                 <div class="item">
-                    <span class="keyvalue">3</span>
+                    <span class="keyvalue"></span>
                     <img src="../assets/img/arrow-right.png" width="9px" height="15px" alt="">
                 </div>
             </div>
             <div class="opration-item" @click="handleRouter('hasRead')">
                 <span class="key">已阅读</span>
                 <div class="item">
-                    <span class="keyvalue">50</span>
+                    <span class="keyvalue"></span>
                     <img src="../assets/img/arrow-right.png" width="9px" height="15px" alt="">
                 </div>
             </div>
@@ -43,7 +43,7 @@
         data() {
             return {
                 tabIndex: 0,
-                balance:'50000',
+                balance:0,
             }
         },
         computed: {
@@ -71,11 +71,12 @@
             // 获取balance
             async getBanlance() {
                 const u3 = createU3(config);
-                this.balance = await u3.getCurrencyBalance({
+                let balance = await u3.getCurrencyBalance({
                     code: config.pointAccount,
                     account: this.chainInfo.accountName,
                     symbol: config.symbol,
                 });
+                this.balance = balance&&balance[0]
             },
         },
     }
