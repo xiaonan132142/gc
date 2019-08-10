@@ -58,6 +58,7 @@
             } else {
                 this.model = data
                 this.desc = data.addModel.desc
+                this.sort = data.addModel.sort
             }
         },
         data() {

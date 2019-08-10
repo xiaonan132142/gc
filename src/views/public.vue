@@ -75,7 +75,7 @@
                     {key: '1', value: '免费', inlineDesc: '用户可免费查看'},
                     {key: '2', value: '付费', inlineDesc: '用户需付费才能查看'},
                 ],
-                contentlist: [{addModel: {desc: '', image: ''}}],
+                contentlist: [{addModel: {desc: '', image: '',sort:''}}],
                 showDialog: false,
                 switchVal: ['1'],
                 setNum: 0,
@@ -109,7 +109,7 @@
             },
             addStep() {
                 this.contentlist.push({
-                    addModel: {id: Date.now(), desc: '', image: ''}
+                    addModel: {id: Date.now(), desc: '', image: '',sort:''}
                 })
             },
             delStep(item) {
