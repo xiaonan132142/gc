@@ -12,10 +12,10 @@
                 第{{model.index+1}}步
             </div>
             <checker v-model="sort" default-item-class="default-tag" selected-item-class="selected-tag">
-                <checker-item value="1">干垃圾</checker-item>
-                <checker-item value="2">湿垃圾</checker-item>
-                <checker-item value="3">其他</checker-item>
-                <checker-item value="4">不可回收</checker-item>
+                <checker-item value="干垃圾">干垃圾</checker-item>
+                <checker-item value="湿垃圾">湿垃圾</checker-item>
+                <checker-item value="其他">其他</checker-item>
+                <checker-item value="不可回收">不可回收</checker-item>
             </checker>
             <x-textarea class="area" :max="50" placeholder="请将描述填写完整，图文并茂更有助于好评哦!" v-model="desc"></x-textarea>
             <uploader

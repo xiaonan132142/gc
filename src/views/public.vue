@@ -17,7 +17,7 @@
                         <button v-if="index>0" class="btn delbtn" @click="delStep(item)">X</button>
                     </div>
                 </div>
-                <div v-if="item.addModel.sort" class="tag-class">{{item.addModel.sort | filterSort}}</div>
+                <div v-if="item.addModel.sort" class="tag-class">{{item.addModel.sort}}</div>
                 <div v-if="item.addModel.desc" class="content">
                     <div class="desc">{{item.addModel.desc}}</div>
                     <img src="../assets/img/eg.png" width="100%" height="181px" alt="img">
@@ -92,21 +92,6 @@
                 this.contentlist = !cache.get('contentsModel') ? [] : cache.get('contentsModel')
                 this.titleVal = cache.get('title')
             }
-        },
-        filters:{
-            filterSort(val){
-                if(val==1){
-                    return '干垃圾'
-                }else if(val==2){
-                    return '湿垃圾'
-                }else if(val==3){
-                    return '其他'
-                }else if(val==4){
-                    return '不可回收'
-                }else{
-                    return;
-                }
-            },
         },
         methods: {
             goback() {
