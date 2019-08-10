@@ -11,7 +11,7 @@
                 <div>{{item.title}}</div>
                 <div class="userinfo">
                     <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
-                    <span>{{item.user.accountName}}</span>
+                    <span>{{item.user[0].accountName}}</span>
                 </div>
                 <div class="content">{{item.contents&&item.contents[0].desc}}</div>
             </div>

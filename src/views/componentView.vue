@@ -8,7 +8,7 @@
                 <div class="left">
                     <div class="userinfo">
                         <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
-                        <span>{{item.user.accountName}}</span>
+                        <span>{{item.user[0].accountName}}</span>
                     </div>
                     <div class="content">{{item.contents[0].desc}}</div>
                 </div>
@@ -17,7 +17,7 @@
             <div v-else class="dec-block">
                 <div class="userinfo">
                     <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
-                    <span>{{item.user.accountName}}</span>
+                    <span>{{item.user[0].accountName}}</span>
                 </div>
                 <div class="content">{{item.contents&&item.contents[0].desc}}</div>
             </div>
@@ -131,7 +131,7 @@
                     'bizId': new Date().getMilliseconds(),              //[必填],业务id,用来保证同一业务不会重复转账
                     'data': {
                         'payer': this.chainInfo.accountName,
-                        'receiver': item.user.accountName,           //[必填],收款账号，一般为商家的账号
+                        'receiver': item.user[0].accountName,           //[必填],收款账号，一般为商家的账号
                         'quantity': item.price + ' GC',           //[必填],数量及单位，如果是UGAS,则比如"100.0000 UGAS"
                         'memo': 'pay for read',                        //[必填],值可以空
                     },
