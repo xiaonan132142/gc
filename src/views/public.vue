@@ -96,7 +96,7 @@
         sort: '',
         image: '',
 
-        remoteUrl: '',
+        remoteUrl: this.GLOBAL.baseUrl + '/classification/upload',
         fileList: [],
 
         commonList: [
@@ -115,16 +115,10 @@
     },
     created() {
       let from = this.$router.currentRoute.params.name;
-      if (from === 'add') {
-        this.contentlist = !cache.get('contentsModel') ? [] : cache.get('contentsModel');
-        this.title = cache.get('title');
-      }
     },
     methods: {
       goback() {
         this.$router.push('Mine');
-        cache.set('contentsModel', []);
-        console.log(cache.get('contentsModel'));
       },
 
       toPublc() {
@@ -162,21 +156,21 @@
             if (state === 'success') {
               this.showDialog = false;
               this.$router.push('SuccessModel');
-              cache.set('contentsModel', []);
-              cache.set('title', '');
             }
           })
           .catch(err => console.log(err));
       },
 
       onChange(FileItem, FileList) {
-        /*this.getUrlBase64(path, ext, (base64)=> {
-            console.log(base64);//base64编码值
-        });*/
+
       },
       onCancel() {
       },
       onSuccess(result, fileItem) {
+        //console.log(result, fileItem);
+        if (result.state = 'success') {
+          this.image = result.filePath;
+        }
       },
       onError() {
       },
