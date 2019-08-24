@@ -13,7 +13,8 @@
               <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
               <span>{{item.user[0].accountName}}</span>
             </div>
-            <div class="content">{{item.desc + '属于' + item.sort }}</div>
+            <div class="content" v-if="item.free">{{item.desc + '属于' + item.sort }}</div>
+            <div class="content to-pay" v-else>待解锁</div>
           </div>
         </div>
 
@@ -29,21 +30,22 @@
           <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
           <span>{{item.user[0].accountName}}</span>
         </div>
-        <div class="content">{{item.desc + '属于' + item.sort }}</div>
+        <div class="content" v-if="item.free">{{item.desc + '属于' + item.sort }}</div>
+        <div class="content to-pay" v-else>待解锁</div>
       </div>
 
 
       <div class="article-info">
         <div class="info">
+          <!--<span :class="[item && item.sort?'tag-class':'']">{{item.sort}}</span>-->
           <span class="price" v-if="!item.free">{{item.price}} 垃圾币</span>
           <span class="price" v-else>免费</span>
-          <span class="comment">1条评论</span>
+          <span class="comment">{{item.commentCount}}条评论</span>
           <span>{{item.date}}</span>
         </div>
         <button class="btn check-btn" @click.stop="checkComment(item._id)">查看评论</button>
       </div>
-      <div><span v-for="(item,index) in item.contents"
-                 :class="[item && item.sort?'tag-class':'']">{{item.sort}}</span></div>
+
     </div>
     <toast v-model="showToast" type="text">{{errorMsg}}</toast>
   </div>
