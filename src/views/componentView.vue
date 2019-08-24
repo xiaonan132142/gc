@@ -111,10 +111,7 @@
           .catch(err => console.log(err));
       },
       getResultlist() {
-        this.axios.get(this.GLOBAL.baseUrl + '/classification/getAll', {
-          keyword: this.parentData,
-          readerId: this.chainInfo.userId,
-        })
+        this.axios.get(this.GLOBAL.baseUrl + `/classification/getAll?keyword=${this.parentData}&readerId=${this.chainInfo.userId}`)
           .then((res) => {
             let { state, data } = res.data;
             if (state === 'success') {
