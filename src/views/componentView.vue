@@ -56,6 +56,7 @@
   import config from '../../config/ultrain';
   import { XButton, Toast } from 'vux';
   import '../assets/scss/componentView.scss';
+  import cache from '@/utils/cache';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -111,7 +112,8 @@
           .catch(err => console.log(err));
       },
       getResultlist() {
-        this.axios.get(this.GLOBAL.baseUrl + `/classification/getAll?keyword=${this.parentData}&readerId=${this.chainInfo.userId}`)
+        let keywordVal = cache.get('keyword')
+        this.axios.get(this.GLOBAL.baseUrl + `/classification/getAll?keyword=${keywordVal}&readerId=${this.chainInfo.userId}`)
           .then((res) => {
             let { state, data } = res.data;
             if (state === 'success') {

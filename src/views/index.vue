@@ -57,6 +57,7 @@
                     name: 'Search',
                     params: {keyword: this.keyword}
                 });
+                cache.set('keyword',this.keyword)
             },
         },
         mounted() {

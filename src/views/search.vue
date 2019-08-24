@@ -14,6 +14,7 @@
 
 <script>
     import {XButton, Toast,XInput} from 'vux'
+    import cache from '@/utils/cache';
     import '../assets/scss/search.scss'
     import componentView from './componentView'
 
@@ -28,7 +29,7 @@
             }
         },
         created(){
-            this.keyword = this.$router.currentRoute.params.keyword
+            this.keyword = this.$router.currentRoute.params.keyword?this.$router.currentRoute.params.keyword:cache.get('keyword')
         },
         mounted(){
             this.$refs.resultlist.getResultlist()
