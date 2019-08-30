@@ -10,7 +10,7 @@
 
           <div class="left">
             <div class="userinfo">
-              <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
+              <img :src="item.user[0].avatar" alt="">
               <span>{{item.user[0].accountName}}</span>
             </div>
             <div class="content" v-if="item.free">{{item.desc + '属于' + item.sort }}</div>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="userinfo">
-          <img src="../assets/img/user.jpg" width="17px" height="17px" alt="">
+          <img :src="item.user[0].avatar" alt="">
           <span>{{item.user[0].accountName}}</span>
         </div>
         <div class="content" v-if="item.free">{{item.desc + '属于' + item.sort }}</div>
@@ -112,7 +112,7 @@
           .catch(err => console.log(err));
       },
       getResultlist() {
-        let keywordVal = cache.get('keyword')
+        let keywordVal = cache.get('keyword');
         this.axios.get(this.GLOBAL.baseUrl + `/classification/getAll?keyword=${keywordVal}&readerId=${this.chainInfo.userId}`)
           .then((res) => {
             let { state, data } = res.data;

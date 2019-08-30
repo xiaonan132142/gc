@@ -1,65 +1,86 @@
 @import "./theme";
-.item-block{
-  width:100%;
+
+.item-block {
+  width: 100%;
   background-color: $cWhite;
   border-radius: 6px;
-  padding:19px 16px;
+  padding: 19px 16px;
   margin-bottom: 20px;
   border: 1px solid #EDEDED;
-  &:hover{
+
+  &:hover {
     transform: translateY(-6px);
     -webkit-transform: translateY(-6px);
     -moz-transform: translateY(-6px);
-    box-shadow: 0 26px 40px -24px rgba(0,36,100,.3);
+    box-shadow: 0 26px 40px -24px rgba(0, 36, 100, .3);
     transition: all .3s ease;
   }
-  .title{
+
+  .title {
     line-height: 25px;
     font-size: 18px;
-    color:#111;
+    color: #111;
   }
-  .userinfo{
-    height:17px;
-    @include flex-row(row,flex-start);
+
+  .userinfo {
+    height: 26px;
+    @include flex-row(row, flex-start);
+
+    img {
+      border-radius: 10px;
+      width: 20px;
+      height: 20px;
+      margin: 10px 10px 10px 0;
+    }
   }
-  .content{
-    flex:1;
+
+  .content {
+    flex: 1;
     margin-top: 8px;
     line-height: 20px;
-    &.to-pay{
+
+    &.to-pay {
       font-style: italic;
     }
   }
-  .dec-block-img{
-    @include flex-row(row,space-between,flex-start);
+
+  .dec-block-img {
+    @include flex-row(row, space-between, flex-start);
     height: 81px;
-    margin:12px 0 8px;
-    .left{
-      @include flex-row(column,flex-start,flex-start);
+    margin: 12px 0 8px;
+
+    .left {
+      @include flex-row(column, flex-start, flex-start);
       margin-right: 30px;
     }
   }
-  .dec-block{
-    @include flex-row(column,flex-start,flex-start);
-    margin:12px 0 8px;
+
+  .dec-block {
+    @include flex-row(column, flex-start, flex-start);
+    margin: 12px 0 8px;
   }
-  .article-info{
+
+  .article-info {
     font-size: 12px;
-    color:rgba(0,0,0,.4);
-    @include flex-row(row,space-between,center);
-    .info{
-      flex:1;
-      .price{
-        color:#FF8D00;
+    color: rgba(0, 0, 0, .4);
+    @include flex-row(row, space-between, center);
+
+    .info {
+      flex: 1;
+
+      .price {
+        color: #FF8D00;
         margin-right: 10px;
       }
-      .comment{
+
+      .comment {
         margin-right: 12px;
       }
     }
-    .check-btn{
-      width:50px;
-      color:#00C691;
+
+    .check-btn {
+      width: 50px;
+      color: #00C691;
     }
   }
 }

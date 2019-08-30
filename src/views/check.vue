@@ -5,10 +5,10 @@
       <div class="title">{{modelData.title}}</div>
       <div class="article-info">
         <div v-if="modelData.user" class="author">
-          <img :src="modelData.user.avatar" width="25px" height="25px" alt="">
+          <img :src="modelData.user.avatar" alt="">
           <span class="name">{{modelData.user.username}}</span>
         </div>
-        <span class="date">{{modelData.createdAt}}</span>
+        <span class="date">{{this.$moment(modelData.createdAt).format('YYYY-MM-DD HH:mm:ss')}}</span>
       </div>
 
       <div v-if="showComment" class="single-block">
@@ -33,7 +33,7 @@
                                  alt="">
                             <span v-if="item.contents">{{itm.desc}}</span>
                         </span>
-            <span v-if="item.contents" class="date">{{itm.time}}</span>
+            <span v-if="item.contents" class="date">{{this.$moment(itm.time).format('YYYY-MM-DD HH:mm:ss')}}</span>
           </div>
         </div>
       </div>

@@ -1,3 +1,3 @@
 const global={}
-global.baseUrl = 'http://benyasin.s1.natapp.cc'
+global.baseUrl = 'http://gc-server.playinggame.me'
 export default global

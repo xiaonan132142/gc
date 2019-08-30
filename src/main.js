@@ -6,11 +6,13 @@ import store from './store'
 import "babel-polyfill"
 import 'lib-flexible/flexible'
 import '@/assets/scss/index.scss'
+import moment from "moment";
+
 import global from './global'
-
 import FastClick from 'fastclick'
-FastClick.attach(document.body)
 
+FastClick.attach(document.body)
+Vue.prototype.$moment = moment;
 
 Vue.prototype.axios = axios
 Vue.prototype.GLOBAL = global

@@ -1,99 +1,126 @@
 @import "./theme";
-.gc-check{
+
+.gc-check {
   &.container-view {
     background-color: $cWhite;
-    .content-wrap{
+
+    .content-wrap {
       @extend .block;
       padding-bottom: 55px;
-      .title{
-        color:rgba(0,0,0,.9);
+
+      .title {
+        color: rgba(0, 0, 0, .9);
         width: 100%;
         font-size: 22px;
         text-align: left;
         line-height: 30px;
       }
-      .article-info{
-        margin:23px 0 6px;
+
+      .article-info {
+        margin: 23px 0 6px;
         height: 20px;
-        @include flex-row(row,space-between);
-        .author{
-          flex:1;
-          @include flex-row(row,flex-start);
-          color:rgba(0,0,0,.6);
+        @include flex-row(row, space-between);
+
+        .author {
+          flex: 1;
+          @include flex-row(row, flex-start);
+          color: rgba(0, 0, 0, .6);
           font-size: 16px;
-          .name{
+
+          img {
+            border-radius: 12.5px;
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+          }
+
+          .name {
 
           }
         }
-        .date{
+
+        .date {
           font-size: 14px;
-          color:rgba(0,0,0,.2);
+          color: rgba(0, 0, 0, .2);
         }
       }
-      .single-block{
-        .step{
+
+      .single-block {
+        .step {
           margin-top: 27px;
           font-size: 18px;
           line-height: 25px;
-          color:rgba(0,0,0,.9);
+          color: rgba(0, 0, 0, .9);
         }
-        .desc{
+
+        .desc {
           font-size: 16px;
           line-height: 22px;
-          margin:22px 0 17px;
-          color:rgba(0,0,0,.8);
+          margin: 22px 0 17px;
+          color: rgba(0, 0, 0, .8);
         }
       }
-      .comment-list{
+
+      .comment-list {
         width: 100%;
-        margin:40px 0 0;
+        margin: 40px 0 0;
         position: relative;
-        .title{
-          color:rgba(0,0,0,.9);
+
+        .title {
+          color: rgba(0, 0, 0, .9);
           font-size: 16px;
           font-weight: 700;
         }
-        .comment-item{
-          @include flex-row(column,sapce-between,flex-start);
+
+        .comment-item {
+          @include flex-row(column, sapce-between, flex-start);
           border-bottom: 1px solid #EDEDED;
-          padding:22px 0 14px;
-          .user{
+          padding: 22px 0 14px;
+
+          .user {
             height: 38px;
             margin-bottom: 9px;
             @include flex-row();
-            .avatar{
+
+            .avatar {
               @include block(38px);
             }
-            .accountname{
+
+            .accountname {
               font-size: 15px;
-              color:rgba(0,0,0,.4);
+              color: rgba(0, 0, 0, .4);
             }
           }
-          .comment-info{
-            @include flex-row(column,flex-start,flex-start);
-            .content{
-              color:rgba(0,0,0,.8);
+
+          .comment-info {
+            @include flex-row(column, flex-start, flex-start);
+
+            .content {
+              color: rgba(0, 0, 0, .8);
               font-size: 14px;
               line-height: 20px;
-              margin:8px 0 3px 0;
+              margin: 8px 0 3px 0;
             }
-            .date{
-              color:rgba(0,0,0,.2);
+
+            .date {
+              color: rgba(0, 0, 0, .2);
               font-size: 12px;
               line-height: 17px;
             }
           }
         }
       }
-      .comment{
-        padding:0 20px;
+
+      .comment {
+        padding: 0 20px;
         height: 55px;
         position: fixed;
-        bottom:0;
+        bottom: 0;
         left: 0;
         right: 0;
         background-color: $cWhite;
-        @include flex-row(row,space-between);
+        @include flex-row(row, space-between);
+
         .defalut-class {
           width: 35px;
           height: 26px;
@@ -103,25 +130,29 @@
           background-color: #fff;
           margin-right: 6px;
           position: relative;
-          .num{
+
+          .num {
             position: absolute;
-            top:-10px;
+            top: -10px;
           }
         }
-        .weui-cells_checkbox{
+
+        .weui-cells_checkbox {
           width: 116px;
           margin-bottom: 15px;
-          @include flex-row(row,flex-start);
+          @include flex-row(row, flex-start);
         }
-        .areablock{
+
+        .areablock {
           flex: 1;
           border-radius: 17px;
           background-color: #F1F1F1;
-          height:34px;
+          height: 34px;
           line-height: 16px;
-          font-size:13px;
+          font-size: 13px;
         }
-        .submit-btn{
+
+        .submit-btn {
           width: 81%;
         }
       }
