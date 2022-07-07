@@ -13,7 +13,7 @@
     "axios": "^0.19.0",
     "fastclick": "^1.0.6",
     "lib-flexible": "^0.3.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "u3.js": "^0.3.12",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
